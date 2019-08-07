@@ -8,6 +8,8 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { shape, string, arrayOf } from 'prop-types';
 
 import { RootContainer,
+  HeaderContainer,
+  FooterContainer,
   SEOContainer,
   BreadcrumbsContainer,
   HeroContainer,
@@ -121,6 +123,7 @@ export default function PageTemplateContainer({
 }) {
   return (
     <RootContainer>
+      <HeaderContainer />
       <SEOContainer meta={meta} />
       <Main
         css={`
@@ -130,6 +133,7 @@ export default function PageTemplateContainer({
         <BreadcrumbsContainer location={location} />
         {renderBlocks(blocks)}
       </Main>
+      <FooterContainer />
     </RootContainer>
   );
 }

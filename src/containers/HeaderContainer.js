@@ -53,7 +53,9 @@ export default function HeaderContainer() {
         <Link
           to="/"
           css={`
-            padding: 3.5rem 0;
+            padding: 2rem 0;
+            display: flex;
+            align-items: center;
           `}
         >
           <Logo />
@@ -93,7 +95,7 @@ export default function HeaderContainer() {
                 <Nav.List.Item
                   key={item.url}
                   css={`
-                    padding: 1rem 0;
+                    padding: 3rem 0;
                   `}
                 >
                   <Button

@@ -6,8 +6,6 @@ import React from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import { node } from 'prop-types';
 
-import HeaderContainer from './HeaderContainer';
-import FooterContainer from './FooterContainer';
 import CookieContainer from './CookieContainer';
 import { Link, Pre, Ul, P, H3, Ol } from '~components';
 
@@ -69,9 +67,7 @@ export default function RootContainer({ children }) {
         pre: Pre,
       }}
     >
-      <HeaderContainer />
       {children}
-      <FooterContainer />
       <CookieContainer />
     </MDXProvider>
   );

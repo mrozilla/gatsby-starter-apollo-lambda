@@ -2,18 +2,41 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import styled from 'styled-components';
+import React from 'react';
+
+import { RootContainer, AccountDeleteContainer, FooterContainer } from '~containers';
+import { Main, Section, Link, Logo } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Label = styled.label`
-  display: flex;
-  align-items: center;
-  color: hsla(var(--hsl-text), 0.75);
-  font-size: 1.25rem;
-  line-height: 3rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-`;
+export default function AccountDeleteScreen() {
+  return (
+    <RootContainer>
+      <Main
+        css={`
+          grid-template-columns: var(--width-outside) minmax(40rem, 50rem) var(--width-outside);
+          justify-content: center;
+        `}
+      >
+        <Section
+          css={`
+            grid-column: 2;
+            padding: 15vw 0;
+          `}
+        >
+          <Link to="/">
+            <Logo
+              css={`
+                margin: 0 4rem;
+              `}
+            />
+          </Link>
+          <AccountDeleteContainer />
+        </Section>
+      </Main>
+      <FooterContainer />
+    </RootContainer>
+  );
+}

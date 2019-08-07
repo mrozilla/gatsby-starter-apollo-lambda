@@ -2,18 +2,16 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import styled from 'styled-components';
-
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Label = styled.label`
-  display: flex;
-  align-items: center;
-  color: hsla(var(--hsl-text), 0.75);
-  font-size: 1.25rem;
-  line-height: 3rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-`;
+exports.onCreatePage = ({ page, actions }) => {
+  // serve the src/pages/app.js file
+  if (page.path.match(/^\/app/)) {
+    // for all pages with url or /u/*
+    page.matchPath = '/u/*'; // eslint-disable-line no-param-reassign
+
+    actions.createPage(page);
+  }
+};

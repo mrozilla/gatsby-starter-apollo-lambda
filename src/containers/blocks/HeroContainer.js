@@ -213,15 +213,21 @@ HeroContainer.propTypes = {
       look:  string.isRequired,
     }),
   ),
-  // backgroundImage: string, // TODO:
+  backgroundImage: shape({
+    childImageSharp: shape({
+      fluid: shape({
+        src: string,
+      }),
+    }),
+  }),
   video: string,
 };
 
 HeroContainer.defaultProps = {
-  announcement: null,
-  subtitle:     '',
-  mdx:          '',
-  buttons:      [],
-  // backgroundImage:    '',
-  video:        '',
+  announcement:    null,
+  subtitle:        '',
+  mdx:             '',
+  buttons:         [],
+  backgroundImage: null,
+  video:           '',
 };
