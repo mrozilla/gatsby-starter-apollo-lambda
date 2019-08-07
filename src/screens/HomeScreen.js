@@ -2,18 +2,28 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import styled from 'styled-components';
+import React from 'react';
+
+import { RootContainer, AppHeaderContainer } from '~containers';
+import { Main, Section, H1 } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Label = styled.label`
-  display: flex;
-  align-items: center;
-  color: hsla(var(--hsl-text), 0.75);
-  font-size: 1.25rem;
-  line-height: 3rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-`;
+export default function HomeScreen() {
+  return (
+    <RootContainer>
+      <AppHeaderContainer />
+      <Main>
+        <Section
+          css={`
+            padding: 10vw var(--width-outside);
+          `}
+        >
+          <H1>Home screen</H1>
+        </Section>
+      </Main>
+    </RootContainer>
+  );
+}

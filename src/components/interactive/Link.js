@@ -17,10 +17,6 @@ const StyledLink = styled.a`
 
   transition: all 250ms;
 
-  /* &[aria-current] {
-    font-weight: 700; /* TODO: investigate if better styling
-  } */
-
   ${({ look }) => {
     if (look === 'primary') {
       return css`

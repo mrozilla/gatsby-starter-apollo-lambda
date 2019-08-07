@@ -2,18 +2,28 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import styled from 'styled-components';
+import React from 'react';
+import { useApolloClient } from '@apollo/react-hooks';
+import { navigate } from '@reach/router';
+
+import { Button } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Label = styled.label`
-  display: flex;
-  align-items: center;
-  color: hsla(var(--hsl-text), 0.75);
-  font-size: 1.25rem;
-  line-height: 3rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-`;
+export default function LogoutContainer() {
+  const client = useApolloClient();
+
+  const handleLogout = () => {
+    client.clearStore();
+    localStorage.removeItem('token');
+    navigate(__DEV__ ? '/u/login/' : '/');
+  };
+
+  return (
+    <Button look="tertiary" onClick={handleLogout}>
+      Log out
+    </Button>
+  );
+}

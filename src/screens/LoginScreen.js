@@ -3,74 +3,77 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from 'react';
-import { Main, Section, H1, P, Link } from '~components';
-import { RootContainer, HeaderContainer } from '~containers';
+
+import { RootContainer, LoginContainer, FooterContainer } from '~containers';
+import { Main, Section, P, Link, Text, Logo } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function ErrorNotFoundPage() {
+export default function LoginScreen() {
   return (
     <RootContainer>
-      <HeaderContainer />
       <Main
         css={`
-          grid-template-columns: var(--width-outside) 1fr var(--width-outside);
-          padding: 10rem 0 0;
+          grid-template-columns: var(--width-outside) minmax(40rem, 50rem) var(--width-outside);
+          justify-content: center;
         `}
       >
         <Section
           css={`
             grid-column: 2;
-            padding: 5rem var(--width-outside);
-            text-align: center;
-
-            @media screen and (min-width: 900px) {
-              padding: 20vh 0 15vh;
-            }
+            padding: 15vw 0;
           `}
         >
-          <H1
-            css={`
-              font-size: 6rem;
-              line-height: 1;
-              font-weight: 700;
-              letter-spacing: -0.04em;
-              margin: 0 0 2rem;
-
-              @media screen and (min-width: 1200px) {
-                font-size: 10rem;
-              }
-            `}
-          >
-            404
-          </H1>
+          <Link to="/">
+            <Logo
+              css={`
+                margin: 0 4rem;
+              `}
+            />
+          </Link>
+          <LoginContainer />
           <P
             css={`
-              font-size: 5rem;
-              line-height: 5rem;
-              letter-spacing: -0.025em;
-              margin: 0 0 4rem;
+              font-size: 1.5rem;
+              line-height: 2rem;
+              padding: 0 4rem;
+              margin: 0 0 0.5rem;
             `}
           >
-            Page not found
+            <Text
+              css={`
+                opacity: 0.5;
+              `}
+            >
+              Can&apos;t remember?{' '}
+            </Text>
+            <Link to="/u/forgot/" look="secondary">
+              Reset your password
+            </Link>
           </P>
           <P
             css={`
-              font-size: 2.5rem;
+              font-size: 1.5rem;
+              line-height: 2rem;
+              padding: 0 4rem;
             `}
           >
-            Whoops, this page doesn&apos;t exist. Check the links in the menus around, they might
-            help.
-            <br />
-            And if they don&apos;t help you can always go back to the{' '}
-            <Link to="/" look="primary">
-              home page
+            <Text
+              css={`
+                opacity: 0.5;
+              `}
+            >
+              Don&apos;t have an an account yet?{' '}
+            </Text>
+            <Link to="/u/signup/" look="secondary">
+              Sign up
             </Link>
           </P>
         </Section>
       </Main>
+      <FooterContainer />
     </RootContainer>
   );
 }

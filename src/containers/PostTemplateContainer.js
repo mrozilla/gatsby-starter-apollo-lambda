@@ -6,7 +6,11 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
-import { RootContainer, SEOContainer, HighlightShareContainer } from '~containers';
+import { RootContainer,
+  SEOContainer,
+  HeaderContainer,
+  FooterContainer,
+  HighlightShareContainer } from '~containers';
 import { Main, Article, Aside, Link, H1, P, Ul, Li, Button, Icon, View, Text } from '~components';
 import { useSocialShare } from '~utils';
 
@@ -47,6 +51,7 @@ export default function PostTemplateContainer({
   return (
     <RootContainer>
       <SEOContainer meta={meta} />
+      <HeaderContainer />
       <Main
         css={`
           grid-gap: 4rem;
@@ -184,6 +189,7 @@ export default function PostTemplateContainer({
           </Ul>
         </Aside>
       </Main>
+      <FooterContainer />
       <HighlightShareContainer location={location} />
     </RootContainer>
   );

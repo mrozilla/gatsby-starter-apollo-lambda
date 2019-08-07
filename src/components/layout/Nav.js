@@ -46,8 +46,6 @@ Nav.List.Item = styled.li`
   font-weight: 700;
   letter-spacing: 0.05em;
 
-  ${({ padding }) => `padding: ${padding}`};
-
   @media screen and (min-width: 900px) {
     display: flex;
     align-items: center;
@@ -83,8 +81,6 @@ Nav.Toggle = styled.input`
   outline: none;
 
   position: absolute;
-  top: ${({ top = 0 }) => top};
-  right: ${({ right = 0 }) => right};
   padding: 2rem;
 
   cursor: pointer;

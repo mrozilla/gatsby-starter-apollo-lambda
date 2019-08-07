@@ -20,7 +20,7 @@ export const Button = styled.button`
 
   font-weight: 700;
   text-align: center;
-  line-height: 1em;
+  line-height: 2rem;
   letter-spacing: 0.05em;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -43,11 +43,7 @@ export const Button = styled.button`
   ${({ look }) => {
     if (look === 'primary') {
       return css`
-        background-image: linear-gradient(
-          45deg,
-          var(--color-brand-primary),
-          var(--color-brand-secondary)
-        );
+        background-image: var(--gradient-brand);
         color: var(--color-inverse) !important;
 
         &:not(:disabled):hover,
@@ -71,11 +67,7 @@ export const Button = styled.button`
 
         &:not(:disabled):hover,
         &:not(:disabled):focus {
-          background-image: linear-gradient(
-            45deg,
-            var(--color-brand-primary),
-            var(--color-brand-secondary)
-          );
+          background-image: var(--gradient-brand);
           color: var(--color-inverse);
           box-shadow: 0 0.5rem 0.5rem hsla(var(--hsl-text), 0.1);
         }
