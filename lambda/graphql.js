@@ -5,11 +5,12 @@
 require('dotenv').config({ path: '.env.development' });
 
 const { ApolloServer, gql } = require('apollo-server-lambda');
-const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 
 const User = require('./models/User');
-const DateTime = require('./models/DateTime');
+
+const scalars = require('./utils/scalars');
+const getUserFromJwt = require('./utils/getUserFromJwt');
 
 // ─────────────────────────────────────────────────────────────────────────────
 // mongoose
@@ -43,31 +44,14 @@ const rootResolvers = {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// helpers
-// ─────────────────────────────────────────────────────────────────────────────
-
-const getUser = (token) => {
-  try {
-    if (token) {
-      return jwt.verify(token, process.env.JWT_SECRET);
-    }
-    return null;
-  } catch (err) {
-    return null;
-  }
-};
-
-// ─────────────────────────────────────────────────────────────────────────────
 // server
 // ─────────────────────────────────────────────────────────────────────────────
 
 const server = new ApolloServer({
-  typeDefs:  [rootTypeDefs, User.typeDefs, DateTime.typeDefs],
-  resolvers: [rootResolvers, User.resolvers, DateTime.resolvers],
+  typeDefs:  [rootTypeDefs, User.typeDefs, scalars.typeDefs],
+  resolvers: [rootResolvers, User.resolvers, scalars.resolvers],
   context:   ({ event }) => {
-    const tokenWithBearer = event.headers.authorization || '';
-    const [, token] = tokenWithBearer.split(' ');
-    const user = getUser(token);
+    const user = getUserFromJwt(event);
     return {
       me:     user,
       models: { User: User.Model },

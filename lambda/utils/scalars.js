@@ -3,7 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 const { gql } = require('apollo-server-lambda');
-const { DateTimeResolver } = require('graphql-scalars');
+const { DateTimeResolver, EmailAddressResolver } = require('graphql-scalars');
 
 // ─────────────────────────────────────────────────────────────────────────────
 // typeDefs
@@ -11,6 +11,7 @@ const { DateTimeResolver } = require('graphql-scalars');
 
 exports.typeDefs = gql`
   scalar DateTime
+  scalar Email
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -19,4 +20,5 @@ exports.typeDefs = gql`
 
 exports.resolvers = {
   DateTime: DateTimeResolver,
+  Email:    EmailAddressResolver,
 };
