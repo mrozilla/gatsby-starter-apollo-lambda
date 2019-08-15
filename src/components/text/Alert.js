@@ -12,7 +12,7 @@ import styled, { css } from 'styled-components';
 export const Alert = styled.span`
   display: inline-block;
   line-height: 3rem;
-  padding: 1rem 2rem;
+  padding: 1rem;
   box-shadow: 0 0 0 2px;
   border-radius: 0.25rem;
 

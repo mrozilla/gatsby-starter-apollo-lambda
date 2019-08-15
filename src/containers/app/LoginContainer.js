@@ -7,7 +7,7 @@ import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { navigate } from '@reach/router';
 
-import { Form, Input, H1, Button, Alert } from '~components';
+import { Form, Input, H1, Button, Alert, Icon } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
@@ -105,8 +105,17 @@ export default function LoginContainer() {
             grid-column: 1 / -1;
             margin: 2rem 0 0;
             font-weight: 700;
+
+            display: flex;
+            align-items: center;
           `}
         >
+          <Icon
+            icon="FaExclamationTriangle"
+            css={`
+              margin: 0 1rem 0 0;
+            `}
+          />
           {error.graphQLErrors.map(err => err.message).join(', ')}
         </Alert>
       )}

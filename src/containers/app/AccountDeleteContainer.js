@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { gql } from 'apollo-boost';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
 
-import { Form, Section, H1, P, Button, Input, Alert, Link, Text } from '~components';
+import { Form, Section, H1, P, Button, Input, Alert, Link, Text, Icon } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
@@ -131,8 +131,17 @@ export default function DeleteContainer() {
               grid-column: 1 / -1;
               margin: 2rem 0 0;
               font-weight: 700;
+
+              display: flex;
+              align-items: center;
             `}
           >
+            <Icon
+              icon="FaExclamationTriangle"
+              css={`
+                margin: 0 1rem 0 0;
+              `}
+            />
             {error.graphQLErrors.map(err => err.message).join(', ')}
           </Alert>
         )}
