@@ -50,13 +50,10 @@ const rootResolvers = {
 const server = new ApolloServer({
   typeDefs:  [rootTypeDefs, User.typeDefs, scalars.typeDefs],
   resolvers: [rootResolvers, User.resolvers, scalars.resolvers],
-  context:   ({ event }) => {
-    const user = getUserFromJwt(event);
-    return {
-      me:     user,
-      models: { User: User.Model },
-    };
-  },
+  context:   ({ event }) => ({
+    me:     getUserFromJwt(event),
+    models: { User: User.Model },
+  }),
 });
 
 exports.handler = server.createHandler();

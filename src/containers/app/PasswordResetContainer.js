@@ -22,10 +22,10 @@ export default function PasswordResetContainer({ token }) {
     }
   `);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      mutate({ variables: { token, password } });
+      await mutate({ variables: { token, password } });
     } catch (err) {
       console.warn({ ...err }); // eslint-disable-line no-console
     }

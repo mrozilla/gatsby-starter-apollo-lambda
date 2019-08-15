@@ -2,7 +2,7 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { shape, string } from 'prop-types';
 import { navigate } from '@reach/router';
 import qs from 'query-string';
@@ -15,10 +15,12 @@ import { Main, Section, Logo, Link } from '~components';
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function PasswordResetScreen({ location }) {
-  const { token } = qs.parse(location.search);
-  if (token) {
-    navigate('/u/reset/', { state: { token } }, { replace: true });
-  }
+  useEffect(() => {
+    const { token } = qs.parse(location.search);
+    if (token) {
+      navigate('/u/reset/', { state: { token } }, { replace: true });
+    }
+  }, [location.search]);
 
   return (
     <RootContainer>
@@ -41,7 +43,7 @@ export default function PasswordResetScreen({ location }) {
               `}
             />
           </Link>
-          <PasswordResetContainer token={location?.state?.token} />
+          {location?.state?.token && <PasswordResetContainer token={location?.state?.token} />}
         </Section>
       </Main>
       <FooterContainer />
