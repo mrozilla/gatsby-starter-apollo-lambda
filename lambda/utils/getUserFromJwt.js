@@ -2,23 +2,22 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import styled, { css } from 'styled-components';
+const jwt = require('jsonwebtoken');
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-// prettier-ignore
-export const Alert = styled.span`
-  display: inline-block;
-  line-height: 3rem;
-  padding: 1rem;
-  box-shadow: 0 0 0 2px;
-  border-radius: 0.25rem;
+module.exports = (event) => {
+  try {
+    const tokenWithBearer = event.headers.authorization || '';
+    const [, token] = tokenWithBearer.split(' ');
 
-  ${({ type }) => type
-    && css`
-      background-color: hsla(var(--hsl-${type}), 0.05);
-      color: var(--color-${type});
-    `};
-`;
+    if (token) {
+      return jwt.verify(token, process.env.JWT_SECRET);
+    }
+    return null;
+  } catch (err) {
+    return null;
+  }
+};

@@ -25,10 +25,10 @@ export default function AppHeaderContainer() {
   `);
 
   useEffect(() => {
-    if (data.me === null) {
+    if (error) {
       navigate('/u/login/');
     }
-  }, [data.me]);
+  }, [error]);
 
   return (
     <Header>

@@ -2,34 +2,88 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { string } from 'prop-types';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 
-import { Form, Input, H1, Button, Link, Section, P } from '~components';
+import { H1, Button, Link, Section, P } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function PasswordResetContainer({ token }) {
-  const [password, setPassword] = useState(__DEV__ ? '43214321' : '');
-
-  const [mutate, { loading, error, data = {} }] = useMutation(gql`
-    mutation($token: String!, $password: String!) {
-      resetPassword(token: $token, password: $password)
+function RequestEmailVerificationContainer() {
+  const [requestEmailVerification, { loading, data = {} }] = useMutation(gql`
+    mutation {
+      requestEmailVerification
     }
   `);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSendEmailVerification = async () => {
     try {
-      await mutate({ variables: { token, password } });
+      await requestEmailVerification();
     } catch (err) {
       console.warn({ ...err }); // eslint-disable-line no-console
     }
   };
+
+  if (data.requestEmailVerification) {
+    return (
+      <>
+        <H1
+          css={`
+            grid-area: title;
+
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin: 0 0 2rem;
+          `}
+        >
+          Check your email!
+        </H1>
+        <P>We have sent you an email with a verification link.</P>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <H1
+        css={`
+          grid-area: title;
+
+          font-weight: 700;
+          font-size: 2.5rem;
+          margin: 0 0 2rem;
+        `}
+      >
+        Your email verification link has expired
+      </H1>
+      <Button look="primary" disabled={loading} onClick={handleSendEmailVerification}>
+        {loading ? 'Loading...' : 'Send link again'}
+      </Button>
+    </>
+  );
+}
+
+export default function EmailVerificationContainer({ token }) {
+  const [verifyEmail, { error, data = {} }] = useMutation(gql`
+    mutation($token: String!) {
+      verifyEmail(token: $token)
+    }
+  `);
+
+  useEffect(() => {
+    async function asyncMutate() {
+      try {
+        await verifyEmail({ variables: { token } });
+      } catch (err) {
+        console.warn({ ...err }); // eslint-disable-line no-console
+      }
+    }
+    if (token) asyncMutate();
+  }, [token]);
 
   if (error) {
     return (
@@ -43,34 +97,12 @@ export default function PasswordResetContainer({ token }) {
           border-radius: var(--border-radius);
         `}
       >
-        <H1
-          css={`
-            grid-area: title;
-
-            font-weight: 700;
-            font-size: 2.5rem;
-            margin: 0 0 2rem;
-          `}
-        >
-          Your password reset link has expired
-        </H1>
-        <P>
-          <Link
-            to="/u/forgot/"
-            look="primary"
-            css={`
-              font-weight: 700;
-            `}
-          >
-            Try again
-          </Link>{' '}
-          with a new link
-        </P>
+        <RequestEmailVerificationContainer />
       </Section>
     );
   }
 
-  if (data.resetPassword) {
+  if (data.verifyEmail) {
     return (
       <Section
         css={`
@@ -91,17 +123,17 @@ export default function PasswordResetContainer({ token }) {
             margin: 0 0 2rem;
           `}
         >
-          Your password has been successfully reset
+          Your email has been successfully verified
         </H1>
         <P>
           <Link
-            to="/u/login/"
+            to="/u/"
             look="primary"
             css={`
               font-weight: 700;
             `}
           >
-            Log in
+            Go back
           </Link>{' '}
           to your account
         </P>
@@ -110,7 +142,7 @@ export default function PasswordResetContainer({ token }) {
   }
 
   return (
-    <Form
+    <Section
       css={`
         grid-column: 2;
         padding: 4rem;
@@ -118,51 +150,20 @@ export default function PasswordResetContainer({ token }) {
         background-color: var(--color-inverse);
         box-shadow: var(--border-box-shadow);
         border-radius: var(--border-radius);
-
-        grid-template:
-          'title title'
-          'password password'
-          'button button'
-          / 1fr 1fr;
       `}
-      onSubmit={handleSubmit}
     >
       <H1
         css={`
-          grid-area: title;
-
           font-weight: 700;
           font-size: 2.5rem;
-          margin: 0 0 2rem;
         `}
       >
-        Enter your new password
+        Loading...
       </H1>
-      <Input
-        type="password"
-        name="password"
-        label="Password"
-        placeholder="Password"
-        pattern="^\S{8,}$"
-        error="Your password has to be at least 8 characters long"
-        required
-        value={password}
-        onChange={({ target }) => setPassword(target.value)}
-      />
-      <Button
-        type="submit"
-        look="primary"
-        disabled={loading}
-        css={`
-          grid-area: button;
-        `}
-      >
-        {loading ? 'Loading...' : 'Save new password'}
-      </Button>
-    </Form>
+    </Section>
   );
 }
 
-PasswordResetContainer.propTypes = {
+EmailVerificationContainer.propTypes = {
   token: string.isRequired,
 };

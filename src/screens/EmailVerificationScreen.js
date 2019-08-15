@@ -7,18 +7,18 @@ import { shape, string } from 'prop-types';
 import { navigate } from '@reach/router';
 import qs from 'query-string';
 
-import { RootContainer, PasswordResetContainer, FooterContainer } from '~containers';
+import { RootContainer, EmailVerificationContainer, FooterContainer } from '~containers';
 import { Main, Section, Logo, Link } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function PasswordResetScreen({ location }) {
+export default function EmailVerificationScreen({ location }) {
   useEffect(() => {
     const { token } = qs.parse(location.search);
     if (token) {
-      navigate('/u/reset/', { state: { token } }, { replace: true });
+      navigate('/u/verify/', { state: { token } }, { replace: true });
     }
   }, [location.search]);
 
@@ -43,7 +43,7 @@ export default function PasswordResetScreen({ location }) {
               `}
             />
           </Link>
-          {location?.state?.token && <PasswordResetContainer token={location?.state?.token} />}
+          {location?.state?.token && <EmailVerificationContainer token={location?.state?.token} />}
         </Section>
       </Main>
       <FooterContainer />
@@ -51,13 +51,13 @@ export default function PasswordResetScreen({ location }) {
   );
 }
 
-PasswordResetScreen.propTypes = {
+EmailVerificationScreen.propTypes = {
   location: shape({
     search: string,
   }),
 };
 
-PasswordResetScreen.defaultProps = {
+EmailVerificationScreen.defaultProps = {
   location: {
     search: undefined,
   },

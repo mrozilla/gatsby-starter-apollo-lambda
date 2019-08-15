@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 
-import { Form, Input, H1, Button, Alert, Link, Section, P, Text } from '~components';
+import { Form, Input, H1, Button, Alert, Link, Section, P, Text, Icon } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
@@ -119,8 +119,17 @@ export default function PasswordForgotContainer() {
               grid-column: 1 / -1;
               margin: 2rem 0 0;
               font-weight: 700;
+
+              display: flex;
+              align-items: center;
             `}
           >
+            <Icon
+              icon="FaExclamationTriangle"
+              css={`
+                margin: 0 1rem 0 0;
+              `}
+            />
             {error.graphQLErrors.map(err => err.message).join(', ')}
           </Alert>
         )}

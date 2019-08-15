@@ -2,51 +2,58 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React from 'react';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { Router } from '@reach/router';
+require('dotenv').config({ path: '.env.development' });
 
-import { SignupScreen,
-  EmailVerificationScreen,
-  LoginScreen,
-  PasswordForgotScreen,
-  PasswordResetScreen,
-  AccountDeleteScreen,
-  HomeScreen } from '../screens';
+const { ApolloServer, gql } = require('apollo-server-lambda');
+const mongoose = require('mongoose');
+
+const User = require('./models/User');
+
+const scalars = require('./utils/scalars');
+const getUserFromJwt = require('./utils/getUserFromJwt');
 
 // ─────────────────────────────────────────────────────────────────────────────
-// graphql
+// mongoose
 // ─────────────────────────────────────────────────────────────────────────────
 
-const client = new ApolloClient({
-  uri:     '/.netlify/functions/graphql',
-  request: (operation) => {
-    const token = localStorage.getItem('token');
-    operation.setContext({
-      headers: {
-        authorization: token ? `Bearer ${token}` : '',
-      },
-    });
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// root
+// ─────────────────────────────────────────────────────────────────────────────
+
+const rootTypeDefs = gql`
+  type Query {
+    _: Boolean
+  }
+
+  type Mutation {
+    _: Boolean
+  }
+
+  type Subscription {
+    _: Boolean
+  }
+`;
+
+const rootResolvers = {
+  Query: {
+    _: () => false,
   },
+  Mutation: {},
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// server
+// ─────────────────────────────────────────────────────────────────────────────
+
+const server = new ApolloServer({
+  typeDefs:  [rootTypeDefs, User.typeDefs, scalars.typeDefs],
+  resolvers: [rootResolvers, User.resolvers, scalars.resolvers],
+  context:   ({ event }) => ({
+    me:     getUserFromJwt(event),
+    models: { User: User.Model },
+  }),
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
-// component
-// ─────────────────────────────────────────────────────────────────────────────
-
-export default function App() {
-  return (
-    <ApolloProvider client={client}>
-      <Router>
-        <HomeScreen path="/u/" />
-        <SignupScreen path="/u/signup/" />
-        <EmailVerificationScreen path="/u/verify" />
-        <LoginScreen path="/u/login/" />
-        <PasswordForgotScreen path="/u/forgot/" />
-        <PasswordResetScreen path="/u/reset/" />
-        <AccountDeleteScreen path="/u/delete/" />
-      </Router>
-    </ApolloProvider>
-  );
-}
+exports.handler = server.createHandler();
