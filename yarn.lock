@@ -2,20 +2,20 @@
 # yarn lockfile v1
 
 
-"@apollo/react-common@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@apollo/react-common/-/react-common-3.0.0.tgz#2357518c4b3bf1fd680ee2ac114f565f527ec55d"
-  integrity sha512-EqHASkcmxipy2hU8rja+lD1S1HoTdodKKyJZZ3dgewnAHXnzXnnC3rw1+lkrgXPFsI2n2d2N2LYisD79OCdPmw==
+"@apollo/react-common@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@apollo/react-common/-/react-common-3.0.1.tgz#9c8f1433ddaddf80e471259126a76f1738dd4273"
+  integrity sha512-7SC4qqPFo/41AhaQKCRovIshKkm4JLEGXyRHi+NPsaNJyk2J/HrWREnlHVqoPzYeIyq33f1L6j/NAkKn1NOnnQ==
   dependencies:
     ts-invariant "^0.4.4"
     tslib "^1.10.0"
 
-"@apollo/react-hooks@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@apollo/react-hooks/-/react-hooks-3.0.0.tgz#5fe4ff7812020f3e1b91b8628af8c03276496d78"
-  integrity sha512-7kaV6rkx2WZjDYcBmp52oyhTxbNn5Jc4AUmsXZVEnDu9uuvNYURA8bLlJNF8yu4zS7ed8D+ZebC0y0bhrz8wIg==
+"@apollo/react-hooks@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@apollo/react-hooks/-/react-hooks-3.0.1.tgz#83869beddcbb06cba05d50ccf05097191d245a9c"
+  integrity sha512-Boai/T+2z3m23Gy82m1pB+FOlrhkBJ//EIYa3pqX9sUsvgRWMKC+3NxpeHEUYqsf0qzFiM1dO4Pn9OxCFstM8g==
   dependencies:
-    "@apollo/react-common" "^3.0.0"
+    "@apollo/react-common" "^3.0.1"
     "@wry/equality" "^0.1.9"
     ts-invariant "^0.4.4"
     tslib "^1.10.0"
@@ -6067,10 +6067,10 @@ gatsby-plugin-netlify-cms@^4.1.6:
     netlify-identity-widget "^1.4.11"
     webpack "^4.16.0"
 
-gatsby-plugin-netlify@2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-netlify/-/gatsby-plugin-netlify-2.1.4.tgz#d76a101d99b54f6bd7b96420e192e1a8cafd3a4d"
-  integrity sha512-UjLCnVaLN2nl6oH9n87GAYmAvezUqJH9LGLlCztAWZxIwcedQAGbHv8gWtg374Q/yTsLeLRKx8tjHBdBIzwfTg==
+gatsby-plugin-netlify@2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-netlify/-/gatsby-plugin-netlify-2.1.5.tgz#c6780e706adda40577d2b89bec8b6c5c7cfb7a3c"
+  integrity sha512-3lZwKE33HVqSqQC5Mr3oovruGOFq70RWnFlZORCggaVH83nS2lhNLMsCPa1Zg4I1kQddWv+8qdQFDxrIyA+1/g==
   dependencies:
     "@babel/runtime" "^7.0.0"
     fs-extra "^4.0.2"
@@ -6255,10 +6255,10 @@ gatsby-transformer-sharp@^2.2.6:
     semver "^5.6.0"
     sharp "^0.22.1"
 
-gatsby@2.13.62:
-  version "2.13.62"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.13.62.tgz#ed2b5fc59199383c32f0ba6d64414a46452f7802"
-  integrity sha512-Q/hIwFJlQ2nC5ICenYQHk8uP3Pqbl/Ikq4Na5OS+3vnBkV19Yc4dgPIKc/DxOmIpgEfn6FQW15OHjoEXmPygew==
+gatsby@2.13.64:
+  version "2.13.64"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.13.64.tgz#c689dd45e0364d2f156182657766d1014c3e17f7"
+  integrity sha512-v9y2gTAKj73e6pujYcUwuaT+GWvrPN4ppaD1ieTdEfIRrjl4iSNvWro3+bn2XEcorfUwzcRb6dJ9pCSCwQvgdw==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/core" "^7.0.0"
