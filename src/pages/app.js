@@ -8,6 +8,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { Router } from '@reach/router';
 
 import { SignupScreen,
+  EmailVerificationScreen,
   LoginScreen,
   PasswordForgotScreen,
   PasswordResetScreen,
@@ -38,9 +39,9 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        {/* <Redirect from="/" to="/u/signup/" /> */}
         <HomeScreen path="/u/" />
         <SignupScreen path="/u/signup/" />
+        <EmailVerificationScreen path="/u/verify" />
         <LoginScreen path="/u/login/" />
         <PasswordForgotScreen path="/u/forgot/" />
         <PasswordResetScreen path="/u/reset/" />

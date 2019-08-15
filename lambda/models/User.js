@@ -6,9 +6,9 @@ const { gql, AuthenticationError } = require('apollo-server-lambda');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
-const sgMail = require('@sendgrid/mail');
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const errors = require('../utils/errors');
+const emails = require('../utils/emails');
 
 // ─────────────────────────────────────────────────────────────────────────────
 // mongoose
@@ -35,11 +35,16 @@ exports.Model = mongoose.model(
       email: {
         type:     String,
         required: true,
+        unique:   true,
         trim:     true,
       },
       password: {
         type:     String,
         required: true,
+      },
+      isVerified: {
+        type:    Boolean,
+        default: false,
       },
     },
     { timestamps: true }, // adds createdAt and updatedAt automatic fields
@@ -60,8 +65,9 @@ exports.typeDefs = gql`
     firstName: String
     lastName: String
     username: String!
-    email: String!
+    email: Email!
     password: String!
+    isVerified: Boolean!
     createdAt: DateTime!
     updatedAt: DateTime!
   }
@@ -70,7 +76,7 @@ exports.typeDefs = gql`
     firstName: String
     lastName: String
     username: String!
-    email: String!
+    email: Email!
     password: String!
   }
 
@@ -81,8 +87,10 @@ exports.typeDefs = gql`
 
   extend type Mutation {
     signup(signupData: SignupInput!): String!
+    requestEmailVerification: Boolean!
+    verifyEmail(token: String!): Boolean!
     login(loginData: LoginInput!): String!
-    requestPasswordReset(email: String!): String!
+    requestPasswordReset(email: Email!): String!
     resetPassword(token: String!, password: String!): Boolean!
     delete(email: String!): Boolean!
   }
@@ -104,13 +112,49 @@ exports.resolvers = {
           password: await bcrypt.hash(signupData.password, 10),
         });
 
-        const token = jwt.sign({ username: user.username, _id: user._id }, process.env.JWT_SECRET, {
+        emails.sendEmailVerification({
+          email: signupData.email,
+          token: jwt.sign({ username: user.username, email: user.email }, process.env.JWT_SECRET, {
+            expiresIn: '1h',
+          }),
+        });
+
+        return jwt.sign({ username: user.username, _id: user._id }, process.env.JWT_SECRET, {
           expiresIn: process.env.JWT_EXP,
         });
-        return token;
       } catch (error) {
-        if (error.code === 11000) throw new AuthenticationError('Username already taken'); // check if DB-specific error
+        if (error.code === 11000) throw new AuthenticationError(errors.userExists); // check if DB-specific error
         throw error;
+      }
+    },
+
+    requestEmailVerification: async (_, __, { me, models }) => {
+      try {
+        const user = await models.User.findOne({ _id: me._id });
+        if (!user) throw new Error(errors.userNotExist);
+
+        emails.sendEmailVerification({
+          email: user.email,
+          token: jwt.sign({ username: user.username, email: user.email }, process.env.JWT_SECRET, {
+            expiresIn: '1h',
+          }),
+        });
+
+        return true;
+      } catch (error) {
+        throw new Error(error.emailNotSent);
+      }
+    },
+
+    verifyEmail: async (_, { token }, { models }) => {
+      try {
+        const { username, email } = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await models.User.updateOne({ email, username }, { isVerified: true });
+        if (!user) throw new Error(); // intentionally empty to catch JWT errors too
+
+        return true;
+      } catch (error) {
+        throw new Error(errors.linkExpired);
       }
     },
 
@@ -118,38 +162,25 @@ exports.resolvers = {
       const user = await models.User.findOne({
         $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
       });
-      if (!user) throw new AuthenticationError('Invalid password or email');
+      if (!user) throw new AuthenticationError(errors.invalidLogin);
 
       const isPasswordValid = await bcrypt.compare(password, user.password);
-      if (!isPasswordValid) throw new AuthenticationError('Invalid password or email');
+      if (!isPasswordValid) throw new AuthenticationError(errors.invalidLogin);
 
-      const token = jwt.sign({ username: user.username, _id: user._id }, process.env.JWT_SECRET, {
+      return jwt.sign({ username: user.username, _id: user._id }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXP,
       });
-      return token;
     },
 
     requestPasswordReset: async (_, { email }, { models }) => {
       const user = await models.User.findOne({ email });
-      if (!user) throw new Error("User doesn't exist");
+      if (!user) throw new Error(errors.userNotExist);
 
       const token = jwt.sign({ email, oldPassword: user.password }, process.env.JWT_SECRET, {
         expiresIn: '1h',
       }); // old password hash intentionally part of the JWT hash
 
-      try {
-        const msg = {
-          to:                    email,
-          from:                  'test@example.com',
-          templateId:            'd-9ae88a5e9d524d078e059f58ad1b4d3f',
-          dynamic_template_data: {
-            link: `http://localhost:8000/u/reset/?token=${token}`,
-          },
-        };
-        sgMail.send(msg);
-      } catch (error) {
-        throw new Error("Email wasn't sent");
-      }
+      emails.sendPasswordReset({ email, token });
 
       return token;
     },
@@ -161,11 +192,11 @@ exports.resolvers = {
           { email, password: oldPassword },
           { password: await bcrypt.hash(password, 10) },
         );
-        if (!user) throw new Error(); // intentionally empty, caught in catch block
+        if (!user) throw new Error(); // intentionally empty to catch JWT errors too
 
         return true;
       } catch (error) {
-        throw new Error('Password reset link has expired');
+        throw new Error(errors.linkExpired);
       }
     },
 
@@ -174,11 +205,11 @@ exports.resolvers = {
         const { n, deletedCount } = await models.User.deleteOne({
           $and: [{ _id: me._id }, { email }],
         });
-        if (n !== 1 || deletedCount !== 1) throw new Error(); // intentionally empty, caught in catch block
+        if (n !== 1 || deletedCount !== 1) throw new Error(); // intentionally empty to catch JWT errors too
 
         return true;
       } catch (error) {
-        throw new Error("User account wasn't removed");
+        throw new Error(errors.userNotDeleted);
       }
     },
   },

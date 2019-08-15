@@ -19,6 +19,7 @@ export { default as JobsContainer } from './blocks/JobsContainer';
 
 // app
 export { default as SignupContainer } from './app/SignupContainer';
+export { default as EmailVerificationContainer } from './app/EmailVerificationContainer';
 export { default as LoginContainer } from './app/LoginContainer';
 export { default as LogoutContainer } from './app/LogoutContainer';
 export { default as PasswordForgotContainer } from './app/PasswordForgotContainer';
