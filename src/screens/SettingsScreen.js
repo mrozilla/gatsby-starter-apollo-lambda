@@ -48,7 +48,7 @@ export default function SettingsScreen() {
           <Section
             css={`
               padding: 4rem;
-              background-color: var(--color-inverse);
+              background: var(--color-inverse);
               box-shadow: var(--border-box-shadow);
               border-radius: var(--border-radius);
             `}

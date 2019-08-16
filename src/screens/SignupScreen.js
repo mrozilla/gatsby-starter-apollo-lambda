@@ -18,7 +18,7 @@ export default function SignupScreen() {
         css={`
           grid-template-columns: var(--width-outside) minmax(40rem, 50rem) var(--width-outside);
           justify-content: center;
-          background-image: var(--gradient-brand);
+          background: var(--gradient-brand);
         `}
       >
         <Section

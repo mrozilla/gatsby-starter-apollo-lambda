@@ -58,7 +58,7 @@ export default function Video({ src, css, ...rest }) {
             height: 100%;
 
             padding: 1rem;
-            background-color: hsla(var(--hsl-dark), 0.75);
+            background: hsla(var(--hsl-dark), 0.75);
             z-index: var(--z-index-modal);
 
             display: grid;

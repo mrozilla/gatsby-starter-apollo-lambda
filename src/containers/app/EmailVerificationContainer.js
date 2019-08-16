@@ -92,7 +92,7 @@ export default function EmailVerificationContainer({ token }) {
           grid-column: 2;
           padding: 4rem;
           margin: 2rem 0;
-          background-color: var(--color-inverse);
+          background: var(--color-inverse);
           box-shadow: var(--border-box-shadow);
           border-radius: var(--border-radius);
         `}
@@ -109,7 +109,7 @@ export default function EmailVerificationContainer({ token }) {
           grid-column: 2;
           padding: 4rem;
           margin: 2rem 0;
-          background-color: var(--color-inverse);
+          background: var(--color-inverse);
           box-shadow: var(--border-box-shadow);
           border-radius: var(--border-radius);
         `}
@@ -147,7 +147,7 @@ export default function EmailVerificationContainer({ token }) {
         grid-column: 2;
         padding: 4rem;
         margin: 2rem 0;
-        background-color: var(--color-inverse);
+        background: var(--color-inverse);
         box-shadow: var(--border-box-shadow);
         border-radius: var(--border-radius);
       `}
