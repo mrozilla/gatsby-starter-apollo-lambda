@@ -85,6 +85,16 @@ exports.typeDefs = gql`
     password: String!
   }
 
+  input AccountInput {
+    _id: ID!
+    firstName: String
+    lastName: String
+    username: String
+    email: Email
+    password: String
+    newPassword: String
+  }
+
   extend type Mutation {
     signup(signupData: SignupInput!): String!
     requestEmailVerification: Boolean!
@@ -92,6 +102,7 @@ exports.typeDefs = gql`
     login(loginData: LoginInput!): String!
     requestPasswordReset(email: Email!): String!
     resetPassword(token: String!, password: String!): Boolean!
+    updateAccount(accountData: AccountInput!): User!
     delete(email: String!): Boolean!
   }
 `;
@@ -197,6 +208,26 @@ exports.resolvers = {
         return true;
       } catch (error) {
         throw new Error(errors.linkExpired);
+      }
+    },
+
+    updateAccount: async (_, { accountData: { newPassword, ...rest } }, { me, models }) => {
+      const user = await models.User.findOne({ _id: me._id });
+      if (!user) throw new Error(errors.userNotExist);
+
+      const isPasswordValid = await bcrypt.compare(rest.password, user.password);
+      if (!isPasswordValid) throw new AuthenticationError(errors.invalidLogin);
+
+      try {
+        await user.set({
+          ...rest,
+          password: newPassword ? await bcrypt.hash(newPassword, 10) : user.password,
+        });
+        await user.save();
+
+        return user;
+      } catch (error) {
+        throw new Error(errors.changesNotSaved);
       }
     },
 

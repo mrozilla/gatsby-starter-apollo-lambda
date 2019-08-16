@@ -18,6 +18,8 @@ export { default as PeopleContainer } from './blocks/PeopleContainer';
 export { default as JobsContainer } from './blocks/JobsContainer';
 
 // app
+export { default as AppHeaderContainer } from './app/AppHeaderContainer';
+
 export { default as SignupContainer } from './app/SignupContainer';
 export { default as EmailVerificationContainer } from './app/EmailVerificationContainer';
 export { default as LoginContainer } from './app/LoginContainer';
@@ -25,4 +27,5 @@ export { default as LogoutContainer } from './app/LogoutContainer';
 export { default as PasswordForgotContainer } from './app/PasswordForgotContainer';
 export { default as PasswordResetContainer } from './app/PasswordResetContainer';
 export { default as AccountDeleteContainer } from './app/AccountDeleteContainer';
-export { default as AppHeaderContainer } from './app/AppHeaderContainer';
+
+export { default as AccountInformationContainer } from './app/AccountInformationContainer';

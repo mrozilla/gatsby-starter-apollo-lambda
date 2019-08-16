@@ -12,7 +12,7 @@ import { Form, Section, H1, P, Button, Input, Alert, Link, Text, Icon } from '~c
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function DeleteContainer() {
+export default function AccountDeleteContainer() {
   const [email, setEmail] = useState(__DEV__ ? 'jan@mrozilla.cz' : '');
 
   const [mutate, { loading, error, data = {} }] = useMutation(gql`
@@ -160,7 +160,7 @@ export default function DeleteContainer() {
         >
           Want to keep your account?{' '}
         </Text>
-        <Link to="/u/" look="secondary">
+        <Link to="/u/settings/" look="secondary">
           Go back
         </Link>
       </P>
