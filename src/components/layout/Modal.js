@@ -67,20 +67,18 @@ export default function Modal({
   outerPadding,
   innerPadding,
   innerMinWidth,
-  onClickEscape,
-  onClickBackground,
-  onClickClose,
+  onClose,
   children,
 }) {
   useEventListener('keydown', (event) => {
     if (isOpen && event.key === 'Escape') {
-      onClickEscape();
+      onClose();
     }
   });
 
   const handleClickBackground = (event) => {
     if (event.target === event.currentTarget) {
-      onClickBackground();
+      onClose();
     }
   };
 
@@ -107,7 +105,7 @@ export default function Modal({
               right: 0;
               padding: 4rem 4rem 2rem 2rem;
             `}
-            onClick={onClickClose}
+            onClick={onClose}
           >
             ×
           </Button>
@@ -119,23 +117,19 @@ export default function Modal({
 }
 
 Modal.propTypes = {
-  innerKey:          string,
-  isOpen:            bool.isRequired,
-  children:          node.isRequired,
-  outerPadding:      string,
-  innerPadding:      string,
-  innerMinWidth:     string,
-  onClickBackground: func,
-  onClickClose:      func,
-  onClickEscape:     func,
+  innerKey:      string,
+  isOpen:        bool.isRequired,
+  children:      node.isRequired,
+  outerPadding:  string,
+  innerPadding:  string,
+  innerMinWidth: string,
+  onClose:       func,
 };
 
 Modal.defaultProps = {
-  innerKey:          null,
-  outerPadding:      '5vmin',
-  innerPadding:      '4rem',
-  innerMinWidth:     null,
-  onClickBackground: x => x,
-  onClickClose:      x => x,
-  onClickEscape:     x => x,
+  innerKey:      null,
+  outerPadding:  '5vmin',
+  innerPadding:  '4rem',
+  innerMinWidth: null,
+  onClose:       () => {},
 };

@@ -70,7 +70,7 @@ export default function AccountInformationContainer() {
       css={`
         padding: 4rem;
         margin: 0 0 4rem;
-        background-color: var(--color-inverse);
+        background: var(--color-inverse);
         box-shadow: var(--border-box-shadow);
         border-radius: var(--border-radius);
       `}
@@ -190,9 +190,7 @@ export default function AccountInformationContainer() {
 
       <Modal
         isOpen={modal !== ''}
-        onClickBackground={handleCloseModal}
-        onClickClose={handleCloseModal}
-        onClickEscape={handleCloseModal}
+        onClose={handleCloseModal}
       >
         <H1
           css={`
