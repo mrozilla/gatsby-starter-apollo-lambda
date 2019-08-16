@@ -27,34 +27,34 @@ const ModalBackground = styled.aside`
   justify-content: center;
 
   overscroll-behavior: contain;
+  cursor: pointer;
 
-  background-color: hsla(var(--hsl-inverse), 0.95);
-
-  padding: ${({ padding }) => padding};
+  background: hsla(var(--hsl-inverse), 0.95);
 `;
 
 const ModalWrapper = styled.div`
   --shadow: inset 0 0 0 2px hsla(var(--hsl-text), 0.1);
 
+  cursor: initial;
+
+  min-width: 25vw;
+
   position: relative;
 
   border-radius: 0.5rem;
-  background-color: var(--color-inverse);
+  background: var(--color-inverse);
   box-shadow: var(--shadow);
   animation: ${animation({
     from: {
-      opacity:   '0',
-      transform: 'translateY(1vh)',
+      opacity:   0,
+      transform: 'scale(0.99)',
     },
     to: {
-      opacity:   '1',
-      transform: 'translateY(0)',
+      opacity:   1,
+      transform: 'scale(1)',
     },
-    properties: '500ms both',
+    properties: '500ms',
   })};
-
-  padding: ${({ padding }) => padding};
-  min-width: ${({ minWidth }) => minWidth};
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -105,6 +105,7 @@ export default function Modal({
               position: absolute;
               top: 0;
               right: 0;
+              padding: 4rem 4rem 2rem 2rem;
             `}
             onClick={onClickClose}
           >
@@ -132,7 +133,7 @@ Modal.propTypes = {
 Modal.defaultProps = {
   innerKey:          null,
   outerPadding:      '5vmin',
-  innerPadding:      '2rem',
+  innerPadding:      '4rem',
   innerMinWidth:     null,
   onClickBackground: x => x,
   onClickClose:      x => x,
