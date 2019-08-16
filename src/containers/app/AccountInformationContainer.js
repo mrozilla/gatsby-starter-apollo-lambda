@@ -7,14 +7,14 @@ import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 
 import { Form, Input, H1, Button, Alert, Icon, H2, P, Text, Modal, Section } from '~components';
-import { loaderCSS } from '~utils';
+import { emptyLoader } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function AccountInformationContainer() {
-  const { loading, data = {} } = useQuery(gql`
+  const { data = {} } = useQuery(gql`
     {
       me {
         _id
@@ -90,7 +90,7 @@ export default function AccountInformationContainer() {
           css={`
             font-weight: 700;
             display: inline-block;
-            ${loaderCSS}
+            ${emptyLoader}
           `}
         >
           {data?.me?.firstName} {data?.me?.lastName}
@@ -117,7 +117,7 @@ export default function AccountInformationContainer() {
         <Text
           css={`
             display: inline-block;
-            ${loaderCSS}
+            ${emptyLoader}
           `}
         >
           {data?.me?.username}
@@ -144,7 +144,7 @@ export default function AccountInformationContainer() {
         <Text
           css={`
             display: inline-block;
-            ${loaderCSS}
+            ${emptyLoader}
           `}
         >
           {data?.me?.email}
