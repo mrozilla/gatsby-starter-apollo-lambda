@@ -6,6 +6,7 @@ import React from 'react';
 
 import { RootContainer, AppHeaderContainer, AccountInformationContainer } from '~containers';
 import { Main, Section, H1, H2, Link, Button } from '~components';
+import { cardCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
@@ -47,10 +48,7 @@ export default function SettingsScreen() {
           <AccountInformationContainer />
           <Section
             css={`
-              padding: 4rem;
-              background: var(--color-inverse);
-              box-shadow: var(--border-box-shadow);
-              border-radius: var(--border-radius);
+              ${cardCSS}
             `}
           >
             <H2

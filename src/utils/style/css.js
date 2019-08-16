@@ -9,7 +9,7 @@ import { animation } from './animations';
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const emptyLoader = css`
+export const emptyLoaderCSS = css`
   &:empty {
     background: linear-gradient(
       to right,
@@ -31,4 +31,11 @@ export const emptyLoader = css`
     properties: '2s linear infinite',
   })};
   }
+`;
+
+export const cardCSS = css`
+  padding: 4rem;
+  background: var(--color-inverse);
+  box-shadow: var(--border-box-shadow);
+  border-radius: var(--border-radius);
 `;

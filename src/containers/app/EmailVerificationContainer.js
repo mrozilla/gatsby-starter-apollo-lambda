@@ -8,6 +8,7 @@ import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 
 import { H1, Button, Link, Section, P } from '~components';
+import { cardCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
@@ -89,12 +90,9 @@ export default function EmailVerificationContainer({ token }) {
     return (
       <Section
         css={`
+          ${cardCSS}
           grid-column: 2;
-          padding: 4rem;
           margin: 2rem 0;
-          background: var(--color-inverse);
-          box-shadow: var(--border-box-shadow);
-          border-radius: var(--border-radius);
         `}
       >
         <RequestEmailVerificationContainer />
@@ -106,12 +104,9 @@ export default function EmailVerificationContainer({ token }) {
     return (
       <Section
         css={`
+          ${cardCSS}
           grid-column: 2;
-          padding: 4rem;
           margin: 2rem 0;
-          background: var(--color-inverse);
-          box-shadow: var(--border-box-shadow);
-          border-radius: var(--border-radius);
         `}
       >
         <H1
@@ -144,12 +139,9 @@ export default function EmailVerificationContainer({ token }) {
   return (
     <Section
       css={`
+        ${cardCSS}
         grid-column: 2;
-        padding: 4rem;
         margin: 2rem 0;
-        background: var(--color-inverse);
-        box-shadow: var(--border-box-shadow);
-        border-radius: var(--border-radius);
       `}
     >
       <H1

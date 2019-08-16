@@ -8,6 +8,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { navigate } from '@reach/router';
 
 import { Form, Input, H1, Button, Alert, Icon } from '~components';
+import { cardCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
@@ -43,12 +44,9 @@ export default function SignupContainer() {
   return (
     <Form
       css={`
+        ${cardCSS}
         grid-column: 2;
-        padding: 4rem;
         margin: 2rem 0;
-        background: var(--color-inverse);
-        box-shadow: var(--border-box-shadow);
-        border-radius: var(--border-radius);
 
         grid-template:
           'title title'

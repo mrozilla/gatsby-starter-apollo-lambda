@@ -1,7 +1,7 @@
 export { default as mediaQuerise } from './mediaQuerise';
 
 export * from './style/animations';
-export * from './style/emptyLoader';
+export * from './style/css';
 
 export { default as useInactiveTab } from './hooks/useInactiveTab';
 export { default as useLocalStorage } from './hooks/useLocalStorage';

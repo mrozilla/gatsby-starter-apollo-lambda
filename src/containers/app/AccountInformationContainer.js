@@ -7,7 +7,7 @@ import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 
 import { Form, Input, H1, Button, Alert, Icon, H2, P, Text, Modal, Section } from '~components';
-import { emptyLoader } from '~utils';
+import { emptyLoaderCSS, cardCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
@@ -68,11 +68,8 @@ export default function AccountInformationContainer() {
   return (
     <Section
       css={`
-        padding: 4rem;
+        ${cardCSS}
         margin: 0 0 4rem;
-        background: var(--color-inverse);
-        box-shadow: var(--border-box-shadow);
-        border-radius: var(--border-radius);
       `}
     >
       <H2
@@ -90,7 +87,7 @@ export default function AccountInformationContainer() {
           css={`
             font-weight: 700;
             display: inline-block;
-            ${emptyLoader}
+            ${emptyLoaderCSS}
           `}
         >
           {data?.me?.firstName} {data?.me?.lastName}
@@ -117,7 +114,7 @@ export default function AccountInformationContainer() {
         <Text
           css={`
             display: inline-block;
-            ${emptyLoader}
+            ${emptyLoaderCSS}
           `}
         >
           {data?.me?.username}
@@ -144,7 +141,7 @@ export default function AccountInformationContainer() {
         <Text
           css={`
             display: inline-block;
-            ${emptyLoader}
+            ${emptyLoaderCSS}
           `}
         >
           {data?.me?.email}
@@ -188,10 +185,7 @@ export default function AccountInformationContainer() {
         </Button>
       </P>
 
-      <Modal
-        isOpen={modal !== ''}
-        onClose={handleCloseModal}
-      >
+      <Modal isOpen={modal !== ''} onClose={handleCloseModal}>
         <H1
           css={`
             font-weight: 700;

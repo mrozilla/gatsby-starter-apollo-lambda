@@ -7,6 +7,7 @@ import { gql } from 'apollo-boost';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
 
 import { Form, Section, H1, P, Button, Input, Alert, Link, Text, Icon } from '~components';
+import { cardCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
@@ -38,12 +39,9 @@ export default function AccountDeleteContainer() {
     return (
       <Section
         css={`
+        ${cardCSS}
           grid-column: 2;
-          padding: 4rem;
           margin: 2rem 0;
-          background: var(--color-inverse);
-          box-shadow: var(--border-box-shadow);
-          border-radius: var(--border-radius);
         `}
       >
         <H1
@@ -68,12 +66,9 @@ export default function AccountDeleteContainer() {
     <>
       <Form
         css={`
+        ${cardCSS}
           grid-column: 2;
-          padding: 4rem;
           margin: 2rem 0;
-          background: var(--color-inverse);
-          box-shadow: var(--border-box-shadow);
-          border-radius: var(--border-radius);
 
           grid-template:
             'title'
