@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 
-import { Form, Input, H1, Button, Alert, Link, Section, P, Text, Icon } from '~components';
+import { Form, Input, H1, Button, Alert, Link, Section, P, Text, Icon, Loader } from '~components';
 import { cardCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -17,7 +17,7 @@ export default function PasswordForgotContainer() {
   const [email, setEmail] = useState(__DEV__ ? 'jan@mrozilla.cz' : '');
 
   const [mutate, { loading, error, data = {} }] = useMutation(gql`
-    mutation($email: String!) {
+    mutation($email: Email!) {
       requestPasswordReset(email: $email)
     }
   `);
@@ -103,9 +103,19 @@ export default function PasswordForgotContainer() {
           disabled={loading}
           css={`
             grid-area: button;
+            cursor: ${loading && 'wait'} !important;
           `}
         >
-          {loading ? 'Loading...' : 'Send password reset link'}
+          {loading ? (
+            <Loader
+              css={`
+                --color: var(--hsl-inverse);
+                margin: 0 auto;
+              `}
+            />
+          ) : (
+            'Send password reset link'
+          )}
         </Button>
         {error && (
           <Alert

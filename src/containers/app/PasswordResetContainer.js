@@ -7,7 +7,7 @@ import { string } from 'prop-types';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 
-import { Form, Input, H1, Button, Link, Section, P } from '~components';
+import { Form, Input, H1, Button, Link, Section, P, Loader } from '~components';
 import { cardCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -147,9 +147,19 @@ export default function PasswordResetContainer({ token }) {
         disabled={loading}
         css={`
           grid-area: button;
+          cursor: ${loading && 'wait'} !important;
         `}
       >
-        {loading ? 'Loading...' : 'Save new password'}
+        {loading ? (
+          <Loader
+            css={`
+              --color: var(--hsl-inverse);
+              margin: 0 auto;
+            `}
+          />
+        ) : (
+          'Save new password'
+        )}
       </Button>
     </Form>
   );

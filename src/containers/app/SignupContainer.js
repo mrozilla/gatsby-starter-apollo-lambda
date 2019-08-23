@@ -7,7 +7,7 @@ import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { navigate } from '@reach/router';
 
-import { Form, Input, H1, Button, Alert, Icon } from '~components';
+import { Form, Input, H1, Button, Alert, Icon, Loader } from '~components';
 import { cardCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -128,10 +128,19 @@ export default function SignupContainer() {
         disabled={loading}
         css={`
           grid-area: button;
-          cursor: ${loading ? 'wait' : 'pointer'} !important;
+          cursor: ${loading && 'wait'} !important;
         `}
       >
-        {loading ? 'Loading...' : 'Sign up for free'}
+        {loading ? (
+          <Loader
+            css={`
+              --color: var(--hsl-inverse);
+              margin: 0 auto;
+            `}
+          />
+        ) : (
+          'Sign up for free'
+        )}
       </Button>
       {error && (
         <Alert

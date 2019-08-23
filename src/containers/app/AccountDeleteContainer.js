@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { gql } from 'apollo-boost';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
 
-import { Form, Section, H1, P, Button, Input, Alert, Link, Text, Icon } from '~components';
+import { Form, Section, H1, P, Button, Input, Alert, Link, Text, Icon, Loader } from '~components';
 import { cardCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -17,7 +17,7 @@ export default function AccountDeleteContainer() {
   const [email, setEmail] = useState(__DEV__ ? 'jan@mrozilla.cz' : '');
 
   const [mutate, { loading, error, data = {} }] = useMutation(gql`
-    mutation($email: String!) {
+    mutation($email: Email!) {
       delete(email: $email)
     }
   `);
@@ -39,7 +39,7 @@ export default function AccountDeleteContainer() {
     return (
       <Section
         css={`
-        ${cardCSS}
+          ${cardCSS}
           grid-column: 2;
           margin: 2rem 0;
         `}
@@ -66,7 +66,7 @@ export default function AccountDeleteContainer() {
     <>
       <Form
         css={`
-        ${cardCSS}
+          ${cardCSS}
           grid-column: 2;
           margin: 2rem 0;
 
@@ -112,11 +112,20 @@ export default function AccountDeleteContainer() {
           disabled={loading}
           css={`
             grid-area: button;
-            cursor: ${loading ? 'wait' : 'pointer'} !important;
+            cursor: ${loading && 'wait'} !important;
             background: var(--color-danger);
           `}
         >
-          {loading ? 'Loading...' : 'Delete account'}
+          {loading ? (
+            <Loader
+              css={`
+                --color: var(--hsl-inverse);
+                margin: 0 auto;
+              `}
+            />
+          ) : (
+            'Delete account'
+          )}
         </Button>
         {error && (
           <Alert

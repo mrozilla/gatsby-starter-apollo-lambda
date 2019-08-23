@@ -25,6 +25,7 @@ export { default as Toast } from './layout/Toast';
 export { default as AppStore } from './multimedia/AppStore';
 export { Icon } from './multimedia/Icon';
 export { default as Img } from './multimedia/Img';
+export { Loader } from './multimedia/Loader';
 export { Logo } from './multimedia/Logo';
 export { default as Map } from './multimedia/Map';
 export { default as Video } from './multimedia/Video';
