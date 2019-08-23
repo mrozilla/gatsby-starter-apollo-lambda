@@ -69,8 +69,13 @@ Nav.List.Item = styled.li`
       & > ${Nav.List} {
         visibility: visible;
 
-        background-color: var(--color-inverse);
+        background: var(--color-inverse);
         box-shadow: 0 0.5rem 1rem hsla(var(--hsl-text), 0.1);
+
+        & > ${Nav.List.Item}:hover {
+          background: hsla(var(--hsl-brand-primary), 0.025);
+          color: var(--color-brand-primary);
+        }
       }
     }
   }

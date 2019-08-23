@@ -13,7 +13,8 @@ import { SignupScreen,
   PasswordForgotScreen,
   PasswordResetScreen,
   AccountDeleteScreen,
-  HomeScreen } from '../screens';
+  HomeScreen,
+  SettingsScreen } from '../screens';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // graphql
@@ -39,13 +40,15 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <HomeScreen path="/u/" />
         <SignupScreen path="/u/signup/" />
         <EmailVerificationScreen path="/u/verify" />
         <LoginScreen path="/u/login/" />
         <PasswordForgotScreen path="/u/forgot/" />
         <PasswordResetScreen path="/u/reset/" />
         <AccountDeleteScreen path="/u/delete/" />
+
+        <HomeScreen path="/u/" />
+        <SettingsScreen path="/u/settings/" />
       </Router>
     </ApolloProvider>
   );

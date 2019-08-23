@@ -12,7 +12,7 @@ export const Button = styled.button`
   -webkit-appearance: none;
   border: none;
   outline: none;
-  background-color: transparent;
+  background: transparent;
   text-decoration: none !important; /* reset link buttons styling */
 
   display: inline-block;
@@ -21,7 +21,6 @@ export const Button = styled.button`
   font-weight: 700;
   text-align: center;
   line-height: 2rem;
-  letter-spacing: 0.05em;
   border-radius: 0.5rem;
   cursor: pointer;
 
@@ -43,7 +42,7 @@ export const Button = styled.button`
   ${({ look }) => {
     if (look === 'primary') {
       return css`
-        background-image: var(--gradient-brand);
+        background: var(--gradient-brand);
         color: var(--color-inverse) !important;
 
         &:not(:disabled):hover,
@@ -55,21 +54,23 @@ export const Button = styled.button`
 
     if (look === 'primary-inverse') {
       return css`
-        background-color: var(--color-inverse);
+        background: var(--color-inverse);
         color: var(--color-brand-primary);
       `;
     }
 
     if (look === 'secondary') {
       return css`
-        box-shadow: inset 0 0 0 2px var(--color-brand-primary);
-        color: var(--color-brand-primary);
+        --color: var(--hsl-brand-primary);
+
+        box-shadow: inset 0 0 0 2px hsla(var(--color), 1);
+        color: hsla(var(--color), 1);
 
         &:not(:disabled):hover,
         &:not(:disabled):focus {
-          background-image: var(--gradient-brand);
-          color: var(--color-inverse);
-          box-shadow: 0 0.5rem 0.5rem hsla(var(--hsl-text), 0.1);
+          background: hsla(var(--color), 0.1);
+          box-shadow: inset 0 0 0 2px hsla(var(--color), 1),
+            0 0.5rem 0.5rem hsla(var(--hsl-text), 0.1);
         }
       `;
     }

@@ -27,34 +27,34 @@ const ModalBackground = styled.aside`
   justify-content: center;
 
   overscroll-behavior: contain;
+  cursor: pointer;
 
-  background-color: hsla(var(--hsl-inverse), 0.95);
-
-  padding: ${({ padding }) => padding};
+  background: hsla(var(--hsl-inverse), 0.95);
 `;
 
 const ModalWrapper = styled.div`
   --shadow: inset 0 0 0 2px hsla(var(--hsl-text), 0.1);
 
+  cursor: initial;
+
+  min-width: 25vw;
+
   position: relative;
 
   border-radius: 0.5rem;
-  background-color: var(--color-inverse);
+  background: var(--color-inverse);
   box-shadow: var(--shadow);
   animation: ${animation({
     from: {
-      opacity:   '0',
-      transform: 'translateY(1vh)',
+      opacity:   0,
+      transform: 'scale(0.99)',
     },
     to: {
-      opacity:   '1',
-      transform: 'translateY(0)',
+      opacity:   1,
+      transform: 'scale(1)',
     },
-    properties: '500ms both',
+    properties: '500ms',
   })};
-
-  padding: ${({ padding }) => padding};
-  min-width: ${({ minWidth }) => minWidth};
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -67,20 +67,18 @@ export default function Modal({
   outerPadding,
   innerPadding,
   innerMinWidth,
-  onClickEscape,
-  onClickBackground,
-  onClickClose,
+  onClose,
   children,
 }) {
   useEventListener('keydown', (event) => {
     if (isOpen && event.key === 'Escape') {
-      onClickEscape();
+      onClose();
     }
   });
 
   const handleClickBackground = (event) => {
     if (event.target === event.currentTarget) {
-      onClickBackground();
+      onClose();
     }
   };
 
@@ -105,8 +103,9 @@ export default function Modal({
               position: absolute;
               top: 0;
               right: 0;
+              padding: 4rem 4rem 2rem 2rem;
             `}
-            onClick={onClickClose}
+            onClick={onClose}
           >
             ×
           </Button>
@@ -118,23 +117,19 @@ export default function Modal({
 }
 
 Modal.propTypes = {
-  innerKey:          string,
-  isOpen:            bool.isRequired,
-  children:          node.isRequired,
-  outerPadding:      string,
-  innerPadding:      string,
-  innerMinWidth:     string,
-  onClickBackground: func,
-  onClickClose:      func,
-  onClickEscape:     func,
+  innerKey:      string,
+  isOpen:        bool.isRequired,
+  children:      node.isRequired,
+  outerPadding:  string,
+  innerPadding:  string,
+  innerMinWidth: string,
+  onClose:       func,
 };
 
 Modal.defaultProps = {
-  innerKey:          null,
-  outerPadding:      '5vmin',
-  innerPadding:      '2rem',
-  innerMinWidth:     null,
-  onClickBackground: x => x,
-  onClickClose:      x => x,
-  onClickEscape:     x => x,
+  innerKey:      null,
+  outerPadding:  '5vmin',
+  innerPadding:  '4rem',
+  innerMinWidth: null,
+  onClose:       () => {},
 };

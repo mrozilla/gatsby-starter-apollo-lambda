@@ -271,7 +271,7 @@ function renderColumn(column, i) {
                     font-size: 5rem;
                     color: var(--color-brand-primary);
 
-                    // background-image: radial-gradient(circle closest-side, var(--color-brand-primary) 100%, transparent);
+                    // background: radial-gradient(circle closest-side, var(--color-brand-primary) 100%, transparent);
                   `}
                 />
               )}
@@ -469,7 +469,7 @@ export default function SidekickContainer({ header, columns }) {
         text-align: center;
 
         box-shadow: var(--block-box-shadow);
-        background-color: var(--block-background-color);
+        background: var(--block-background-color);
         margin: var(--block-margin);
         padding: var(--block-padding);
       `}

@@ -22,7 +22,7 @@ export const Input = styled.input`
 
   display: block;
   width: 100%;
-  background-color: hsla(var(--hsl-text), 0.05);
+  background: hsla(var(--hsl-text), 0.05);
   line-height: 1.5em;
   padding: 2rem;
   border-radius: 0.5rem;

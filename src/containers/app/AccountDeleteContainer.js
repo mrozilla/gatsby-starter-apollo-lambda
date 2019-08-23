@@ -6,17 +6,18 @@ import React, { useState } from 'react';
 import { gql } from 'apollo-boost';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
 
-import { Form, Section, H1, P, Button, Input, Alert, Link, Text, Icon } from '~components';
+import { Form, Section, H1, P, Button, Input, Alert, Link, Text, Icon, Loader } from '~components';
+import { cardCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function DeleteContainer() {
+export default function AccountDeleteContainer() {
   const [email, setEmail] = useState(__DEV__ ? 'jan@mrozilla.cz' : '');
 
   const [mutate, { loading, error, data = {} }] = useMutation(gql`
-    mutation($email: String!) {
+    mutation($email: Email!) {
       delete(email: $email)
     }
   `);
@@ -38,12 +39,9 @@ export default function DeleteContainer() {
     return (
       <Section
         css={`
+          ${cardCSS}
           grid-column: 2;
-          padding: 4rem;
           margin: 2rem 0;
-          background-color: var(--color-inverse);
-          box-shadow: var(--border-box-shadow);
-          border-radius: var(--border-radius);
         `}
       >
         <H1
@@ -68,12 +66,9 @@ export default function DeleteContainer() {
     <>
       <Form
         css={`
+          ${cardCSS}
           grid-column: 2;
-          padding: 4rem;
           margin: 2rem 0;
-          background-color: var(--color-inverse);
-          box-shadow: var(--border-box-shadow);
-          border-radius: var(--border-radius);
 
           grid-template:
             'title'
@@ -117,12 +112,20 @@ export default function DeleteContainer() {
           disabled={loading}
           css={`
             grid-area: button;
-            cursor: ${loading ? 'wait' : 'pointer'} !important;
-            background-image: initial;
-            background-color: var(--color-danger);
+            cursor: ${loading && 'wait'} !important;
+            background: var(--color-danger);
           `}
         >
-          {loading ? 'Loading...' : 'Delete account'}
+          {loading ? (
+            <Loader
+              css={`
+                --color: var(--hsl-inverse);
+                margin: 0 auto;
+              `}
+            />
+          ) : (
+            'Delete account'
+          )}
         </Button>
         {error && (
           <Alert
@@ -160,7 +163,7 @@ export default function DeleteContainer() {
         >
           Want to keep your account?{' '}
         </Text>
-        <Link to="/u/" look="secondary">
+        <Link to="/u/settings/" look="secondary">
           Go back
         </Link>
       </P>

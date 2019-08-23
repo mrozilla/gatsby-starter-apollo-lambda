@@ -18,7 +18,7 @@ export default function CookieContainer() {
     <Toast
       isVisible={isVisible}
       css={`
-        background-color: var(--color-inverse);
+        background: var(--color-inverse);
         animation: none;
         color: var(--color-text);
         font-size: 1.5rem;

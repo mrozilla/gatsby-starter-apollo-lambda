@@ -22,7 +22,14 @@ export default function LogoutContainer() {
   };
 
   return (
-    <Button look="tertiary" onClick={handleLogout}>
+    <Button
+      css={`
+        &:not(:disabled):hover {
+          transform: translateY(0);
+        }
+      `}
+      onClick={handleLogout}
+    >
       Log out
     </Button>
   );

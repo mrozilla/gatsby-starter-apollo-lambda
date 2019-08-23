@@ -12,7 +12,7 @@ export const Tooltip = styled.div`
   --color: var(--color-brand-primary); /* used to change chevron with background */
 
   position: absolute;
-  background-color: var(--color);
+  background: var(--color);
   border-radius: 1rem;
   color: white;
   font-size: 1.5rem;

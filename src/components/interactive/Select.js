@@ -19,7 +19,7 @@ export const Select = styled.select`
 
   display: block;
   width: 100%;
-  background-color: hsla(var(--hsl-text), 0.05);
+  background: hsla(var(--hsl-text), 0.05);
   line-height: 1.5em;
   cursor: pointer;
   padding: 3rem 1rem 1rem;

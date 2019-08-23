@@ -7,7 +7,8 @@ import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { navigate } from '@reach/router';
 
-import { Form, Input, H1, Button, Alert, Icon } from '~components';
+import { Form, Input, H1, Button, Alert, Icon, Loader } from '~components';
+import { cardCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
@@ -43,12 +44,9 @@ export default function SignupContainer() {
   return (
     <Form
       css={`
+        ${cardCSS}
         grid-column: 2;
-        padding: 4rem;
         margin: 2rem 0;
-        background-color: var(--color-inverse);
-        box-shadow: var(--border-box-shadow);
-        border-radius: var(--border-radius);
 
         grid-template:
           'title title'
@@ -130,10 +128,19 @@ export default function SignupContainer() {
         disabled={loading}
         css={`
           grid-area: button;
-          cursor: ${loading ? 'wait' : 'pointer'} !important;
+          cursor: ${loading && 'wait'} !important;
         `}
       >
-        {loading ? 'Loading...' : 'Sign up for free'}
+        {loading ? (
+          <Loader
+            css={`
+              --color: var(--hsl-inverse);
+              margin: 0 auto;
+            `}
+          />
+        ) : (
+          'Sign up for free'
+        )}
       </Button>
       {error && (
         <Alert

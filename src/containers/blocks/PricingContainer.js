@@ -129,7 +129,7 @@ export default function PricingContainer({ title, subtitle, mdx, pricing }) {
                 display: flex;
                 flex-direction: column;
                 padding: 4rem 4rem 2rem;
-                background-color: var(--color-inverse);
+                background: var(--color-inverse);
                 border-radius: 0.5rem;
                 box-shadow: inset 0 0 0 2px hsla(var(--hsl-text), 0.05);
               `}

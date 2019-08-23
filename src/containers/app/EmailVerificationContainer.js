@@ -7,7 +7,8 @@ import { string } from 'prop-types';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 
-import { H1, Button, Link, Section, P } from '~components';
+import { H1, Button, Link, Section, P, Loader } from '~components';
+import { cardCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
@@ -61,7 +62,16 @@ function RequestEmailVerificationContainer() {
         Your email verification link has expired
       </H1>
       <Button look="primary" disabled={loading} onClick={handleSendEmailVerification}>
-        {loading ? 'Loading...' : 'Send link again'}
+        {loading ? (
+          <Loader
+            css={`
+              --color: var(--hsl-inverse);
+              margin: 0 auto;
+            `}
+          />
+        ) : (
+          'Send link again'
+        )}
       </Button>
     </>
   );
@@ -89,12 +99,9 @@ export default function EmailVerificationContainer({ token }) {
     return (
       <Section
         css={`
+          ${cardCSS}
           grid-column: 2;
-          padding: 4rem;
           margin: 2rem 0;
-          background-color: var(--color-inverse);
-          box-shadow: var(--border-box-shadow);
-          border-radius: var(--border-radius);
         `}
       >
         <RequestEmailVerificationContainer />
@@ -106,12 +113,9 @@ export default function EmailVerificationContainer({ token }) {
     return (
       <Section
         css={`
+          ${cardCSS}
           grid-column: 2;
-          padding: 4rem;
           margin: 2rem 0;
-          background-color: var(--color-inverse);
-          box-shadow: var(--border-box-shadow);
-          border-radius: var(--border-radius);
         `}
       >
         <H1
@@ -144,22 +148,16 @@ export default function EmailVerificationContainer({ token }) {
   return (
     <Section
       css={`
+        ${cardCSS}
         grid-column: 2;
-        padding: 4rem;
         margin: 2rem 0;
-        background-color: var(--color-inverse);
-        box-shadow: var(--border-box-shadow);
-        border-radius: var(--border-radius);
       `}
     >
-      <H1
+      <Loader
         css={`
-          font-weight: 700;
-          font-size: 2.5rem;
+          margin: 0 auto;
         `}
-      >
-        Loading...
-      </H1>
+      />
     </Section>
   );
 }

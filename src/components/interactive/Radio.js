@@ -23,7 +23,7 @@ export const Radio = styled.input.attrs({ type: 'radio' })`
   font-size: 2rem;
   width: 1em;
   height: 1em;
-  background-color: hsla(var(--hsl-text), 0.05);
+  background: hsla(var(--hsl-text), 0.05);
   box-shadow: var(--shadow);
   border-radius: 50%;
 

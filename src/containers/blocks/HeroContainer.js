@@ -85,7 +85,7 @@ export default function HeroContainer({
               top: 0;
               left: 0;
               z-index: -1;
-              background-image: var(--gradient-brand);
+              background: var(--gradient-brand);
             }
 
             & > img {
@@ -101,7 +101,7 @@ export default function HeroContainer({
         <Link
           to={announcement.url}
           css={`
-            background-color: hsla(var(${
+            background: hsla(var(${
               backgroundImage ? '--hsl-inverse' : '--hsl-brand-primary'
             }), 0.05);
             border-radius: 999px;
@@ -116,7 +116,7 @@ export default function HeroContainer({
               font-size: 1.5rem;
               font-weight: 700;
               text-transform: uppercase;
-              background-image: var(--gradient-brand);
+              background: var(--gradient-brand);
               color: var(--color-inverse);
               padding: 0.25rem 0.5rem;
               margin: 0 1rem 0 0;

@@ -15,11 +15,10 @@ import LogoutContainer from './LogoutContainer';
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function AppHeaderContainer() {
-  const { loading, error, data = {} } = useQuery(gql`
+  const { error, data = {} } = useQuery(gql`
     query {
       me {
         username
-        firstName
       }
     }
   `);
@@ -61,11 +60,8 @@ export default function AppHeaderContainer() {
             />
             <Nav.List>
               <Nav.List.Item>
-                <LogoutContainer />
-              </Nav.List.Item>
-              <Nav.List.Item>
                 <Link
-                  to="/u/delete/"
+                  to="/u/settings/"
                   css={`
                     display: block;
                     padding: 1rem;
@@ -75,8 +71,11 @@ export default function AppHeaderContainer() {
                     }
                   `}
                 >
-                  Delete account
+                  Settings
                 </Link>
+              </Nav.List.Item>
+              <Nav.List.Item>
+                <LogoutContainer />
               </Nav.List.Item>
             </Nav.List>
           </Nav.List.Item>
