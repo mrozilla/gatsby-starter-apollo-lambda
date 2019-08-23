@@ -103,7 +103,7 @@ exports.typeDefs = gql`
     requestPasswordReset(email: Email!): String!
     resetPassword(token: String!, password: String!): Boolean!
     updateAccount(accountData: AccountInput!): User!
-    delete(email: String!): Boolean!
+    delete(email: Email!): Boolean!
   }
 `;
 
