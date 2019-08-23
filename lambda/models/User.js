@@ -118,10 +118,11 @@ exports.resolvers = {
   Mutation: {
     signup: async (_, { signupData }, { models }) => {
       try {
-        const user = await models.User.create({
+        const user = new models.User({
           ...signupData,
           password: await bcrypt.hash(signupData.password, 10),
         });
+        await user.save();
 
         emails.sendEmailVerification({
           email: signupData.email,
@@ -232,16 +233,13 @@ exports.resolvers = {
     },
 
     delete: async (_, { email }, { me, models }) => {
-      try {
-        const { n, deletedCount } = await models.User.deleteOne({
-          $and: [{ _id: me._id }, { email }],
-        });
-        if (n !== 1 || deletedCount !== 1) throw new Error(); // intentionally empty to catch JWT errors too
+      const user = await models.User.findOne({ _id: me._id, email });
+      if (!user) throw new Error(errors.userNotExist);
 
-        return true;
-      } catch (error) {
-        throw new Error(errors.userNotDeleted);
-      }
+      const removedUser = await user.remove();
+      if (!removedUser) throw new Error(errors.userNotDeleted);
+
+      return true;
     },
   },
 };
