@@ -7,7 +7,7 @@ import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { navigate } from '@reach/router';
 
-import { Header, Nav, Link, Logo } from '~components';
+import { Header, Nav, Link, Logo, Loader } from '~components';
 import LogoutContainer from './LogoutContainer';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -15,7 +15,7 @@ import LogoutContainer from './LogoutContainer';
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function AppHeaderContainer() {
-  const { error, data = {} } = useQuery(gql`
+  const { loading, error, data = {} } = useQuery(gql`
     query {
       me {
         username
@@ -49,6 +49,11 @@ export default function AppHeaderContainer() {
           `}
         />
         <Nav.List />
+        {loading && (
+          <Nav.List.Item>
+            <Loader />
+          </Nav.List.Item>
+        )}
         {data?.me && (
           <Nav.List.Item>
             {data?.me?.username}
