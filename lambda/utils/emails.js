@@ -17,6 +17,7 @@ module.exports = Object.freeze({
       sgMail.send({
         to:                    email,
         from:                  'test@example.com',
+        subject:               'COMPANY email verification',
         templateId:            'd-68ca96a9cb1943948dd15a9289cfc5ff',
         dynamic_template_data: {
           link: `http://localhost:8000/u/verify/?token=${token}`,
@@ -31,6 +32,7 @@ module.exports = Object.freeze({
       sgMail.send({
         to:                    email,
         from:                  'test@example.com',
+        subject:               'COMPANY password reset',
         templateId:            'd-9ae88a5e9d524d078e059f58ad1b4d3f',
         dynamic_template_data: {
           link: `http://localhost:8000/u/reset/?token=${token}`,
