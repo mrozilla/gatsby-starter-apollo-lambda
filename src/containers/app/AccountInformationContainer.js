@@ -6,7 +6,8 @@ import React, { useState, useEffect } from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 
-import { Form,
+import {
+  Form,
   Input,
   H1,
   Button,
@@ -17,7 +18,7 @@ import { Form,
   Text,
   Modal,
   Section,
-  Loader } from '~components';
+} from '~components';
 import { emptyLoaderCSS, cardCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -315,20 +316,12 @@ export default function AccountInformationContainer() {
             type="submit"
             look="primary"
             disabled={mLoading}
+            loading={mLoading}
             css={`
               grid-area: submit;
             `}
           >
-            {mLoading ? (
-              <Loader
-                css={`
-                  --color: var(--hsl-inverse);
-                  margin: 0 auto;
-                `}
-              />
-            ) : (
-              'Save'
-            )}
+            Save
           </Button>
           <Button
             look="tertiary"

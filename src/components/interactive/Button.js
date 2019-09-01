@@ -2,32 +2,37 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
+import React from 'react';
 import styled, { css } from 'styled-components';
 
+import { Loader } from '~components/multimedia/Loader';
+
 // ─────────────────────────────────────────────────────────────────────────────
-// component
+// helpers
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Button = styled.button`
+const StyledButton = styled.button`
   -webkit-appearance: none;
   border: none;
   outline: none;
   background: transparent;
   text-decoration: none !important; /* reset link buttons styling */
 
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   padding: 1.5rem 4rem;
 
   font-weight: 700;
   text-align: center;
   line-height: 2rem;
   border-radius: 0.5rem;
-  cursor: pointer;
+  cursor: ${({ loading }) => (loading ? 'wait' : 'pointer')};
 
   transition: all 250ms;
 
   &:disabled {
-    cursor: not-allowed;
+    cursor: ${({ loading }) => (loading ? 'wait' : 'not-allowed')};
     opacity: 0.5;
   }
 
@@ -49,6 +54,10 @@ export const Button = styled.button`
         &:not(:disabled):focus {
           box-shadow: 0 0.5rem 0.5rem hsla(var(--hsl-text), 0.1);
         }
+
+        & > ${Loader} {
+          --hsl: var(--hsl-inverse);
+        }
       `;
     }
 
@@ -56,6 +65,15 @@ export const Button = styled.button`
       return css`
         background: var(--color-inverse);
         color: var(--color-brand-primary);
+
+        &:not(:disabled):hover,
+        &:not(:disabled):focus {
+          box-shadow: 0 0.5rem 0.5rem hsla(var(--hsl-text), 0.1);
+        }
+
+        & > ${Loader} {
+          --hsl: var(--hsl-brand-primary);
+        }
       `;
     }
 
@@ -72,6 +90,10 @@ export const Button = styled.button`
           box-shadow: inset 0 0 0 2px hsla(var(--color), 1),
             0 0.5rem 0.5rem hsla(var(--hsl-text), 0.1);
         }
+
+        & > ${Loader} {
+          --hsl: var(--hsl-brand-primary);
+        }
       `;
     }
 
@@ -82,7 +104,12 @@ export const Button = styled.button`
 
         &:not(:disabled):hover,
         &:not(:disabled):focus {
+          background: hsla(var(--hsl-inverse), 0.1);
           color: var(--color-inverse);
+        }
+
+        & > ${Loader} {
+          --hsl: var(--hsl-inverse);
         }
       `;
     }
@@ -92,6 +119,14 @@ export const Button = styled.button`
         &:not(:disabled):hover,
         &:not(:disabled):focus {
           color: var(--color-brand-primary);
+
+          & > ${Loader} {
+            --hsl: var(--hsl-brand-primary);
+          }
+        }
+
+        & > ${Loader} {
+          --hsl: var(--hsl-text);
         }
       `;
     }
@@ -100,9 +135,8 @@ export const Button = styled.button`
       return css`
         color: var(--color-inverse);
 
-        &:not(:disabled):hover,
-        &:not(:disabled):focus {
-          color: var(--color-brand-primary);
+        & > ${Loader} {
+          --hsl: var(--hsl-inverse);
         }
       `;
     }
@@ -110,8 +144,9 @@ export const Button = styled.button`
     return null;
   }};
 
-  ${({ grouped }) => grouped
-    && css`
+  ${({ grouped }) =>
+    grouped &&
+    css`
       &:not(:last-of-type) {
         margin: 0 0 1rem;
         @media screen and (min-width: 600px) {
@@ -120,3 +155,21 @@ export const Button = styled.button`
       }
     `};
 `;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// component
+// ─────────────────────────────────────────────────────────────────────────────
+
+export default function Button({ loading, children, ...rest }) {
+  const renderLoader = () => {
+    if (loading) return <Loader css="margin: 0 1rem 0 0" />;
+    return null;
+  };
+
+  return (
+    <StyledButton loading={loading} {...rest}>
+      {renderLoader()}
+      {children}
+    </StyledButton>
+  );
+}

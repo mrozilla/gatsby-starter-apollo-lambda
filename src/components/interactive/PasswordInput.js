@@ -7,7 +7,7 @@ import zxcvbn from 'zxcvbn';
 
 import { Input } from '~components/primitives/Input';
 import { Icon } from '~components/multimedia/Icon';
-import { Button } from '~components/interactive/Button';
+import Button from '~components/interactive/Button';
 import Dots from '~components/interactive/Dots';
 
 // ─────────────────────────────────────────────────────────────────────────────

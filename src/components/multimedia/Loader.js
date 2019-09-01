@@ -9,14 +9,20 @@ import { animation } from '~utils';
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Loader = styled.div`
-  --color: var(--hsl-brand-primary);
+export const Loader = styled.progress`
+  --hsl: var(--hsl-brand-primary);
+
+  appearance: none;
+  display: inline-block;
+  &::-webkit-progress-bar {
+    background: none;
+  }
 
   width: 1em;
   height: 1em;
 
-  border: 0.125em solid hsla(var(--color), 0.1);
-  border-top-color: hsla(var(--color), 1);
+  border: 0.125em solid hsla(var(--hsl), 0.1);
+  border-top-color: hsla(var(--hsl), 1);
   border-radius: 50%;
 
   animation: ${animation({

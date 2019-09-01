@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 
-import { Form, Input, H1, Button, Alert, Link, Section, P, Text, Icon, Loader } from '~components';
+import { Form, Input, H1, Button, Alert, Link, Section, P, Text, Icon } from '~components';
 import { cardCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -101,21 +101,12 @@ export default function PasswordForgotContainer() {
           type="submit"
           look="primary"
           disabled={loading}
+          loading={loading}
           css={`
             grid-area: button;
-            cursor: ${loading && 'wait'} !important;
           `}
         >
-          {loading ? (
-            <Loader
-              css={`
-                --color: var(--hsl-inverse);
-                margin: 0 auto;
-              `}
-            />
-          ) : (
-            'Send password reset link'
-          )}
+          Send password reset link
         </Button>
         {error && (
           <Alert

@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { gql } from 'apollo-boost';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
 
-import { Form, Section, H1, P, Button, Input, Alert, Link, Text, Icon, Loader } from '~components';
+import { Form, Section, H1, P, Button, Input, Alert, Link, Text, Icon } from '~components';
 import { cardCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -110,22 +110,13 @@ export default function AccountDeleteContainer() {
           type="submit"
           look="primary"
           disabled={loading}
+          loading={loading}
           css={`
             grid-area: button;
-            cursor: ${loading && 'wait'} !important;
             background: var(--color-danger);
           `}
         >
-          {loading ? (
-            <Loader
-              css={`
-                --color: var(--hsl-inverse);
-                margin: 0 auto;
-              `}
-            />
-          ) : (
-            'Delete account'
-          )}
+          Delete account
         </Button>
         {error && (
           <Alert

@@ -9,7 +9,7 @@ import { number, string, node, shape, bool } from 'prop-types';
 import { Ul, Li } from '~components/text/List';
 import { View } from '~components/primitives/View';
 import { Icon } from '~components/multimedia/Icon';
-import { Button } from '~components/interactive/Button';
+import Button from '~components/interactive/Button';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // helpers

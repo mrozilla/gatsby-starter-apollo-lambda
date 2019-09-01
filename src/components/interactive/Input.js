@@ -6,7 +6,7 @@ import React, { forwardRef } from 'react';
 
 import { Text } from '~components/primitives/Text';
 
-import { Button } from '~components/interactive/Button';
+import Button from '~components/interactive/Button';
 import { Checkbox } from '~components/interactive/Checkbox';
 import { Fieldset } from '~components/interactive/Fieldset';
 import { Radio } from '~components/interactive/Radio';

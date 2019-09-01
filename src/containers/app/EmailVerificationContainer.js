@@ -61,17 +61,13 @@ function RequestEmailVerificationContainer() {
       >
         Your email verification link has expired
       </H1>
-      <Button look="primary" disabled={loading} onClick={handleSendEmailVerification}>
-        {loading ? (
-          <Loader
-            css={`
-              --color: var(--hsl-inverse);
-              margin: 0 auto;
-            `}
-          />
-        ) : (
-          'Send link again'
-        )}
+      <Button
+        look="primary"
+        disabled={loading}
+        loading={loading}
+        onClick={handleSendEmailVerification}
+      >
+        Send link again
       </Button>
     </>
   );
