@@ -1,8 +1,8 @@
-# [mrozilla.cz](https://www.mrozilla.cz)
+# Gatsby Starter Apollo Lambda
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/dbe2996d-402e-46ca-9aca-803a2af40cde/deploy-status)](https://app.netlify.com/sites/mrozilla/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/dbe2996d-402e-46ca-9aca-803a2af40cde/deploy-status)](https://app.netlify.com/sites/gatsby-starter-apollo-lambda/deploys)
 
-Source code for [www.gatsby-starter-apollo-lambda.netlify.com](https://www.gatsby-starter-apollo-lambda.netlify.com). The website targets the latest version of Chrome, Safari, and Firefox. [File an issue](https://github.com/mrozilla/gatsby-starter-apollo-lambda/issues) if you see I've borked something up!
+Source code for [www.gatsby-starter-apollo-lambda.netlify.com](https://gatsby-starter-apollo-lambda.netlify.com). The website targets the latest version of Chrome, Safari, and Firefox. [File an issue](https://github.com/mrozilla/gatsby-starter-apollo-lambda/issues) if you see I've borked something up!
 
 ## Technologies
 
