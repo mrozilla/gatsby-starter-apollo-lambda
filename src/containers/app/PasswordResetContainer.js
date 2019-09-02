@@ -144,7 +144,7 @@ export default function PasswordResetContainer({ token }) {
       <Button
         type="submit"
         look="primary"
-        disabled={loading}
+        disabled={loading || password.length < 8}
         css={`
           grid-area: button;
         `}

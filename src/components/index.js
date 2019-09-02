@@ -2,6 +2,7 @@
 // interactive
 // ─────────────────────────────────────────────────────────────────────────────
 
+export { default as AppError } from './interactive/AppError';
 export { default as Button } from './interactive/Button';
 export { Checkbox } from './interactive/Checkbox';
 export { default as Dots } from './interactive/Dots';
@@ -35,7 +36,7 @@ export { default as Toast } from './layout/Toast';
 // ─────────────────────────────────────────────────────────────────────────────
 
 export { default as AppStore } from './multimedia/AppStore';
-export { Icon } from './multimedia/Icon';
+export { default as Icon } from './multimedia/Icon';
 export { default as Img } from './multimedia/Img';
 export { Loader } from './multimedia/Loader';
 export { Logo } from './multimedia/Logo';

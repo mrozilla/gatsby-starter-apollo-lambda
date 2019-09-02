@@ -6,19 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 
-import {
-  Form,
-  Input,
-  H1,
-  Button,
-  Alert,
-  Icon,
-  H2,
-  P,
-  Text,
-  Modal,
-  Section,
-} from '~components';
+import { Form, Input, H1, Button, Icon, H2, P, Text, Modal, Section, AppError } from '~components';
 import { emptyLoaderCSS, cardCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -332,27 +320,12 @@ export default function AccountInformationContainer() {
           >
             Cancel
           </Button>
-          {error && (
-            <Alert
-              type="danger"
-              css={`
-                grid-column: 1 / -1;
-                margin: 2rem 0 0;
-                font-weight: 700;
-
-                display: flex;
-                align-items: center;
-              `}
-            >
-              <Icon
-                icon="FaExclamationTriangle"
-                css={`
-                  margin: 0 1rem 0 0;
-                `}
-              />
-              {error.graphQLErrors.map(err => err.message).join(', ')}
-            </Alert>
-          )}
+          <AppError
+            error={error}
+            errorMessages={{
+              400: 'Fill in all fields',
+            }}
+          />
         </Form>
       </Modal>
     </Section>

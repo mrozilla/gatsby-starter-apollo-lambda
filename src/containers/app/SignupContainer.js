@@ -7,7 +7,7 @@ import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { navigate } from '@reach/router';
 
-import { Form, Input, H1, Button, Alert, Icon } from '~components';
+import { Form, Input, H1, Button, AppError } from '~components';
 import { cardCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -97,6 +97,7 @@ export default function SignupContainer() {
         pattern="^\w{4,}$"
         description="Your username has to be at least 4 characters long"
         error="Your username has to be at least 4 characters long"
+        autoComplete="off"
         required
         value={inputs.username}
         onChange={handleInput}
@@ -125,34 +126,23 @@ export default function SignupContainer() {
       <Button
         type="submit"
         look="primary"
-        disabled={loading}
+        disabled={loading || Object.values(inputs).some(input => input === '')}
+        loading={loading}
         css={`
           grid-area: button;
         `}
       >
         Sign up for free
       </Button>
-      {error && (
-        <Alert
-          type="danger"
-          css={`
-            grid-column: 1 / -1;
-            margin: 2rem 0 0;
-            font-weight: 700;
-
-            display: flex;
-            align-items: center;
-          `}
-        >
-          <Icon
-            icon="FaExclamationTriangle"
-            css={`
-              margin: 0 1rem 0 0;
-            `}
-          />
-          {error.graphQLErrors.map(err => err.message).join(', ')}
-        </Alert>
-      )}
+      <AppError
+        error={error}
+        errorMessages={{
+          400: 'Fill in all fields',
+        }}
+        css={`
+          grid-column: 1 / -1;
+        `}
+      />
     </Form>
   );
 }
