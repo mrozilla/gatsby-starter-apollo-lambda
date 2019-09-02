@@ -5,12 +5,15 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
+import { shape, string } from 'prop-types';
 
-import { RootContainer,
+import {
+  RootContainer,
   SEOContainer,
   HeaderContainer,
   FooterContainer,
-  HighlightShareContainer } from '~containers';
+  HighlightShareContainer,
+} from '~containers';
 import { Main, Article, Aside, Link, H1, P, Ul, Li, Button, Icon, View, Text } from '~components';
 import { useSocialShare } from '~utils';
 
@@ -194,3 +197,14 @@ export default function PostTemplateContainer({
     </RootContainer>
   );
 }
+
+PostTemplateContainer.propTypes = {
+  location: shape({
+    href: string.isRequired,
+  }).isRequired,
+  data: shape({
+    article: shape({
+      body: string,
+    }),
+  }).isRequired,
+};

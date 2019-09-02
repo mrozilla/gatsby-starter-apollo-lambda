@@ -3,6 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React, { useState, useImperativeHandle, useEffect, forwardRef } from 'react';
+import { bool, string, node } from 'prop-types';
 import styled from 'styled-components';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -32,7 +33,7 @@ export const StyledToast = styled.aside`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-function Toast({ isVisible = false, className, children }, ref) {
+function Toast({ isVisible, className, children }, ref) {
   const [{ isOpen, message, css, delay }, setState] = useState({
     isOpen:  isVisible,
     message: '',
@@ -59,5 +60,15 @@ function Toast({ isVisible = false, className, children }, ref) {
     </StyledToast>
   );
 }
+
+Toast.propTypes = {
+  isVisible: bool,
+  className: string,
+  children:  node.isRequired,
+};
+Toast.defaultProps = {
+  isVisible: false,
+  className: '',
+};
 
 export default forwardRef(Toast);

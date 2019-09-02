@@ -3,6 +3,8 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from 'react';
+import { bool, node } from 'prop-types';
+
 import styled, { css } from 'styled-components';
 
 import { Loader } from '~components/multimedia/Loader';
@@ -172,3 +174,11 @@ export default function Button({ loading, children, ...rest }) {
     </StyledButton>
   );
 }
+
+Button.propTypes = {
+  loading:  bool,
+  children: node.isRequired,
+};
+Button.defaultProps = {
+  loading: false,
+};

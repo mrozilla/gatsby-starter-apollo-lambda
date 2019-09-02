@@ -14,6 +14,7 @@ const SVG = styled.svg`
   line-height: 1;
 `;
 
+/* eslint-disable max-len */
 export function Logo({ ...rest }) {
   return (
     <SVG xmlns="http://www.w3.org/2000/SVG" viewBox="0 0 104 18" {...rest}>

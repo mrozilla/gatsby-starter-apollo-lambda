@@ -3,6 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React, { forwardRef } from 'react';
+import { func } from 'prop-types';
 
 import { Input } from '~components/primitives/Input';
 
@@ -10,7 +11,7 @@ import { Input } from '~components/primitives/Input';
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default forwardRef(({ onChange, ...rest }, ref) => {
+function TextInput({ onChange, ...rest }, ref) {
   const handleChange = (event) => {
     if (event.target.type === 'url') {
       // intentional check for state of one slash deleted
@@ -29,4 +30,13 @@ export default forwardRef(({ onChange, ...rest }, ref) => {
   };
 
   return <Input ref={ref} onChange={handleChange} {...rest} />;
-});
+}
+
+TextInput.propTypes = {
+  onChange: func,
+};
+TextInput.defaultProps = {
+  onChange: () => null,
+};
+
+export default forwardRef(TextInput);
