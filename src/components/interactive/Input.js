@@ -20,7 +20,7 @@ import { Legend } from '~components/text/Legend';
 import { Tooltip } from '~components/text/Tooltip';
 import { Error } from '~components/text/Error';
 
-import { Icon } from '~components/multimedia/Icon';
+import Icon from '~components/multimedia/Icon';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component

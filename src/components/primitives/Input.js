@@ -55,11 +55,6 @@ export const Input = styled.input`
       & ~ svg {
         fill: var(--color-info);
       }
-      & ~ ${Tooltip} {
-        visibility: visible;
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
   }
 

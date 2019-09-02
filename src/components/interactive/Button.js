@@ -27,12 +27,12 @@ const StyledButton = styled.button`
   text-align: center;
   line-height: 2rem;
   border-radius: 0.5rem;
-  cursor: ${({ loading }) => (loading ? 'wait' : 'pointer')};
+  cursor: ${({ isLoading }) => (isLoading ? 'wait' : 'pointer')};
 
   transition: all 250ms;
 
   &:disabled {
-    cursor: ${({ loading }) => (loading ? 'wait' : 'not-allowed')};
+    cursor: ${({ isLoading }) => (isLoading ? 'wait' : 'not-allowed')};
     opacity: 0.5;
   }
 
@@ -144,9 +144,8 @@ const StyledButton = styled.button`
     return null;
   }};
 
-  ${({ grouped }) =>
-    grouped &&
-    css`
+  ${({ grouped }) => grouped
+    && css`
       &:not(:last-of-type) {
         margin: 0 0 1rem;
         @media screen and (min-width: 600px) {
@@ -167,7 +166,7 @@ export default function Button({ loading, children, ...rest }) {
   };
 
   return (
-    <StyledButton loading={loading} {...rest}>
+    <StyledButton isLoading={loading} {...rest}>
       {renderLoader()}
       {children}
     </StyledButton>

@@ -10,15 +10,16 @@ import styled, { css } from 'styled-components';
 
 // prettier-ignore
 export const Alert = styled.span`
-  display: inline-block;
+  display: inline-flex;
+
   line-height: 3rem;
   padding: 1rem;
   box-shadow: 0 0 0 2px;
   border-radius: 0.25rem;
 
-  ${({ type }) => type
+  ${({ look }) => look
     && css`
-      background: hsla(var(--hsl-${type}), 0.05);
-      color: var(--color-${type});
+      background: hsla(var(--hsl-${look}), 0.05);
+      color: var(--color-${look});
     `};
 `;
