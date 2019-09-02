@@ -7,14 +7,22 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { Router } from '@reach/router';
 
-import { SignupScreen,
+import {
+  SignupScreen,
   EmailVerificationScreen,
   LoginScreen,
   PasswordForgotScreen,
   PasswordResetScreen,
   AccountDeleteScreen,
   HomeScreen,
-  SettingsScreen } from '../screens';
+  SettingsScreen,
+} from '../screens';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// i18n
+// ─────────────────────────────────────────────────────────────────────────────
+
+import '~utils/i18n';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // graphql

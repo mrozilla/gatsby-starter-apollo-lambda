@@ -28,6 +28,7 @@
     "gatsby-remark-relative-images": "^0.2.3",
     "gatsby-source-filesystem": "2.1.19",
     "gatsby-transformer-sharp": "^2.2.13",
+    "i18next": "^17.0.13",
     "lodash": "^4.17.15",
     "netlify-cms-app": "^2.9.7",
     "netlify-cms-backend-fs": "0.4.4",
@@ -36,6 +37,7 @@
     "react": "16.9.0",
     "react-dom": "16.9.0",
     "react-helmet": "^5.2.1",
+    "react-i18next": "^10.12.2",
     "react-icons": "^3.7.0",
     "styled-components": "^4.3.2",
     "zxcvbn": "^4.4.2"
