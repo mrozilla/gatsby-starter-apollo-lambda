@@ -12,6 +12,7 @@ import styled from 'styled-components';
 const SVG = styled.svg`
   height: 3rem;
   line-height: 1;
+  fill: var(--color-dark);
 `;
 
 /* eslint-disable max-len */

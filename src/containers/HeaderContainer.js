@@ -95,17 +95,10 @@ export default function HeaderContainer() {
                 <Nav.List.Item
                   key={item.url}
                   css={`
-                    padding: 3rem 0;
+                    padding: 2.5rem 0;
                   `}
                 >
-                  <Button
-                    as={Link}
-                    to={item.url}
-                    look={item.look}
-                    css={`
-                      padding: 1rem 4rem;
-                    `}
-                  >
+                  <Button as={Link} to={item.url} look={item.look}>
                     {item.text}
                   </Button>
                 </Nav.List.Item>

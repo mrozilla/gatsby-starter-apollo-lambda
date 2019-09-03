@@ -11,6 +11,9 @@
       "userExists": "Email or username already taken",
       "userNotDeleted": "User account wasn't removed",
       "changesNotSaved": "We couldn't save your changes"
+    },
+    "utils": {
+      "darkMode": "Toggle dark mode"
     }
   }
 }
