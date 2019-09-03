@@ -8,7 +8,8 @@ import { useQuery } from '@apollo/react-hooks';
 import { navigate } from '@reach/router';
 
 import { Header, Nav, Link, Logo, Loader } from '~components';
-import LogoutContainer from './LogoutContainer';
+import DarkModeContainer from '~containers/DarkModeContainer';
+import LogoutContainer from '~containers/app/LogoutContainer';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
@@ -48,43 +49,51 @@ export default function AppHeaderContainer() {
             right: -2rem;
           `}
         />
-        <Nav.List />
-        {loading && (
+        <Nav.List>
+          {loading && (
+            <Nav.List.Item>
+              <Loader />
+            </Nav.List.Item>
+          )}
+          {data?.me && (
+            <Nav.List.Item>
+              {data?.me?.username}
+              <Nav.Toggle
+                css={`
+                  top: -1rem;
+                  right: -2rem;
+                `}
+              />
+              <Nav.List>
+                <Nav.List.Item>
+                  <Link
+                    to="/u/settings/"
+                    css={`
+                      display: block;
+                      padding: 1rem;
+
+                      @media screen and (min-width: 1200px) {
+                        padding: 1rem 4rem;
+                      }
+                    `}
+                  >
+                    Settings
+                  </Link>
+                </Nav.List.Item>
+                <Nav.List.Item>
+                  <LogoutContainer />
+                </Nav.List.Item>
+              </Nav.List>
+            </Nav.List.Item>
+          )}
           <Nav.List.Item>
-            <Loader />
-          </Nav.List.Item>
-        )}
-        {data?.me && (
-          <Nav.List.Item>
-            {data?.me?.username}
-            <Nav.Toggle
+            <DarkModeContainer
               css={`
-                top: -1rem;
-                right: -2rem;
+                padding: 1rem 0 1rem 2rem;
               `}
             />
-            <Nav.List>
-              <Nav.List.Item>
-                <Link
-                  to="/u/settings/"
-                  css={`
-                    display: block;
-                    padding: 1rem;
-
-                    @media screen and (min-width: 1200px) {
-                      padding: 1rem 4rem;
-                    }
-                  `}
-                >
-                  Settings
-                </Link>
-              </Nav.List.Item>
-              <Nav.List.Item>
-                <LogoutContainer />
-              </Nav.List.Item>
-            </Nav.List>
           </Nav.List.Item>
-        )}
+        </Nav.List>
       </Nav>
     </Header>
   );

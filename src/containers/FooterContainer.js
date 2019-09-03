@@ -6,7 +6,8 @@ import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
-import { Footer, Section, H2, Ul, Li, Link, Logo, Badge } from '~components';
+import DarkModeContainer from '~containers/DarkModeContainer';
+import { Footer, Section, H2, Ul, Li, Link, Logo, Badge, P } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -39,7 +40,7 @@ const query = graphql`
 export default function FooterContainer() {
   const { footer } = useStaticQuery(query);
 
-  const renderLinks = (item) => {
+  const renderLinks = item => {
     if (item.type === 'markdown' || item.type === 'mdx') {
       return (
         <Li
@@ -48,19 +49,15 @@ export default function FooterContainer() {
             font-size: 1.75rem;
           `}
         >
-          <Link
-            to="/"
+          <H2
             css={`
-              display: block;
+              font-weight: 700;
               margin: 0 0 2rem;
+              font-size: 2rem;
             `}
           >
-            <Logo
-              css={`
-                font-size: 2rem;
-              `}
-            />
-          </Link>
+            {item.title}
+          </H2>
           <MDXRenderer key={item.mdx}>{item.mdx}</MDXRenderer>
         </Li>
       );
@@ -137,8 +134,33 @@ export default function FooterContainer() {
             }
           `}
         >
+          <Li>
+            <Link
+              to="/"
+              css={`
+                display: block;
+                margin: 0 0 2rem;
+              `}
+            >
+              <Logo />
+            </Link>
+          </Li>
           {footer?.frontmatter?.links?.map(renderLinks)}
         </Ul>
+      </Section>
+      <Section
+        css={`
+          padding: 2rem var(--width-outside);
+          box-shadow: var(--block-box-shadow);
+
+          display: flex;
+          justify-content: space-between;
+
+          font-size: 1.75rem;
+        `}
+      >
+        <P>© 2019 All rights reserved</P>
+        <DarkModeContainer />
       </Section>
     </Footer>
   );

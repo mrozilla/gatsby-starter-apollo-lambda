@@ -5,6 +5,7 @@ export { default as RootContainer } from './RootContainer';
 export { default as SEOContainer } from './SEOContainer';
 export { default as HighlightShareContainer } from './HighlightShareContainer';
 export { default as BreadcrumbsContainer } from './BreadcrumbsContainer';
+export { default as DarkModeContainer } from './DarkModeContainer';
 
 // blocks
 export { default as HeroContainer } from './blocks/HeroContainer';

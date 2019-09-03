@@ -11,7 +11,7 @@ import { Input } from '~components/primitives/Input';
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-function TextInput({ onChange, ...rest }, ref) {
+const TextInput = forwardRef(({ onChange, ...rest }, ref) => {
   const handleChange = (event) => {
     if (event.target.type === 'url') {
       // intentional check for state of one slash deleted
@@ -30,13 +30,13 @@ function TextInput({ onChange, ...rest }, ref) {
   };
 
   return <Input ref={ref} onChange={handleChange} {...rest} />;
-}
+});
 
 TextInput.propTypes = {
   onChange: func,
 };
 TextInput.defaultProps = {
-  onChange: () => null,
+  onChange: undefined,
 };
 
-export default forwardRef(TextInput);
+export default TextInput;

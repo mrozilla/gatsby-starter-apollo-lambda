@@ -13,7 +13,7 @@
     "@mdx-js/react": "^1.4.0",
     "@reach/router": "^1.2.1",
     "apollo-boost": "^0.4.4",
-    "gatsby": "2.15.2",
+    "gatsby": "2.15.3",
     "gatsby-plugin-google-analytics": "2.1.13",
     "gatsby-plugin-manifest": "2.2.13",
     "gatsby-plugin-mdx": "^1.0.35",
@@ -68,6 +68,7 @@
     "serve": "gatsby serve",
     "lint": "eslint 'src/**/*.js'",
     "bump": "yarn upgrade-interactive --latest",
+    "bump:lambda": "cd lambda && yarn bump && cd ..",
     "purge": "rm -rf node_modules && yarn"
   }
 }
