@@ -33,7 +33,7 @@ export const StyledToast = styled.aside`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-function Toast({ isVisible, className, children }, ref) {
+const Toast = forwardRef(({ isVisible, className, children }, ref) => {
   const [{ isOpen, message, css, delay }, setState] = useState({
     isOpen:  isVisible,
     message: '',
@@ -59,7 +59,7 @@ function Toast({ isVisible, className, children }, ref) {
       {message || children}
     </StyledToast>
   );
-}
+});
 
 Toast.propTypes = {
   isVisible: bool,
@@ -71,4 +71,4 @@ Toast.defaultProps = {
   className: '',
 };
 
-export default forwardRef(Toast);
+export default Toast;
