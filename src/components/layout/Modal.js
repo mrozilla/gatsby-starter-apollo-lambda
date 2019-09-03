@@ -2,11 +2,11 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { string, bool, node, func } from 'prop-types';
 import styled from 'styled-components';
 
-import { Button } from '~components/interactive/Button';
+import Button from '~components/interactive/Button';
 
 import { animation, useEventListener } from '~utils';
 

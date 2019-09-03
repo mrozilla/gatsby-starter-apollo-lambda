@@ -13,6 +13,8 @@ import styled, { css } from 'styled-components';
 // ─────────────────────────────────────────────────────────────────────────────
 
 const StyledLink = styled.a`
+  --color: var(--color-brand-primary);
+
   outline: none;
 
   transition: all 250ms;
@@ -20,17 +22,17 @@ const StyledLink = styled.a`
   ${({ look }) => {
     if (look === 'primary') {
       return css`
-        color: var(--color-brand-primary);
-        text-decoration: underline var(--color-brand-primary);
+        color: var(--color);
+        text-decoration: underline var(--color);
       `;
     }
     if (look === 'secondary') {
       return css`
-        color: var(--color-brand-primary);
+        color: var(--color);
         &:hover,
         &:focus,
         &:active {
-          text-decoration: underline var(--color-brand-primary);
+          text-decoration: underline var(--color);
         }
       `;
     }
@@ -39,8 +41,8 @@ const StyledLink = styled.a`
         &:hover,
         &:focus,
         &:active {
-          color: var(--color-brand-primary);
-          text-decoration: underline var(--color-brand-primary);
+          color: var(--color);
+          text-decoration: underline var(--color);
         }
       `;
     }

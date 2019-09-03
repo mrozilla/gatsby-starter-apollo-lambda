@@ -52,7 +52,15 @@ export default function SignupScreen() {
             >
               By creating an account, you agree to our{' '}
             </Text>
-            <Link to="/legal/terms/">Terms of Service</Link>
+            <Link
+              to="/legal/terms/"
+              look="secondary"
+              css={`
+                --color: var(--color-inverse);
+              `}
+            >
+              Terms of Service
+            </Link>
           </P>
           <P
             css={`
@@ -69,7 +77,15 @@ export default function SignupScreen() {
             >
               Already have an account?{' '}
             </Text>
-            <Link to="/u/login/">Log in</Link>
+            <Link
+              to="/u/login/"
+              look="secondary"
+              css={`
+                --color: var(--color-inverse);
+              `}
+            >
+              Log in
+            </Link>
           </P>
         </Section>
       </Main>

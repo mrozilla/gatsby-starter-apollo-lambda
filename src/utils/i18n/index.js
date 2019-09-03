@@ -2,21 +2,36 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React from 'react';
-import { string } from 'prop-types';
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
-import { Text } from '~components/primitives/Text';
+import en from './en.json';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// resources
+// ─────────────────────────────────────────────────────────────────────────────
+
+const resources = {
+  en,
+};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function Icon({ icon, ...rest }) {
-  const iconImport = require('react-icons/fa')[icon]; // eslint-disable-line global-require
+i18n
+  .use(initReactI18next) // passes i18n down to react-i18next
+  .init({
+    resources,
+    lng: 'en',
 
-  return <Text as={iconImport} {...rest} />;
-}
+    react: {
+      useSuspense: false, // TODO: review with Suspence release
+    },
 
-Icon.propTypes = {
-  icon: string.isRequired,
-};
+    interpolation: {
+      escapeValue: false, // react already safes from xss
+    },
+  });
+
+export default i18n;

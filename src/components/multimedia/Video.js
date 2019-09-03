@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { FaPlayCircle, FaTimesCircle } from 'react-icons/fa';
 import { string } from 'prop-types';
 
-import { Button } from '~components/interactive/Button';
+import Button from '~components/interactive/Button';
 import { Aside } from '~components/layout/Aside';
 import { useEventListener } from '~utils';
 

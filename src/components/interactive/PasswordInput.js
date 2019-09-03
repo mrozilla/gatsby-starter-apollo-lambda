@@ -4,10 +4,11 @@
 
 import React, { useState, useRef } from 'react';
 import zxcvbn from 'zxcvbn';
+import { func, string } from 'prop-types';
 
 import { Input } from '~components/primitives/Input';
-import { Icon } from '~components/multimedia/Icon';
-import { Button } from '~components/interactive/Button';
+import Icon from '~components/multimedia/Icon';
+import Button from '~components/interactive/Button';
 import Dots from '~components/interactive/Dots';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -20,7 +21,7 @@ const defaultColors = Array.from({ length: 4 }, () => 'hsla(var(--hsl-text), 0.2
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function TextInput({ onChange, type, ...rest }) {
+export default function PasswordInput({ type, onChange, ...rest }) {
   const inputRef = useRef();
   const [isHidden, setIsHidden] = useState(type === 'password');
   const [colors, setColors] = useState(defaultColors);
@@ -58,6 +59,7 @@ export default function TextInput({ onChange, type, ...rest }) {
       <Input ref={inputRef} type={isHidden ? type : 'text'} onChange={handleChange} {...rest} />
       <Button
         type="button"
+        look="tertiary"
         css={`
           position: absolute;
           top: 2.5rem;
@@ -88,3 +90,16 @@ export default function TextInput({ onChange, type, ...rest }) {
     </>
   );
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// propTypes
+// ─────────────────────────────────────────────────────────────────────────────
+
+PasswordInput.propTypes = {
+  onChange: func,
+  type:     string,
+};
+PasswordInput.defaultProps = {
+  onChange: () => null,
+  type:     'password',
+};

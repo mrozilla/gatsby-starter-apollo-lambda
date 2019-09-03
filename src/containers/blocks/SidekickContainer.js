@@ -7,7 +7,8 @@ import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { shape, string, arrayOf } from 'prop-types';
 
-import { H1,
+import {
+  H1,
   H2,
   Section,
   P,
@@ -19,7 +20,8 @@ import { H1,
   Img,
   AppStore,
   View,
-  Map } from '~components';
+  Map,
+} from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -270,8 +272,6 @@ function renderColumn(column, i) {
                     margin: 0 0 1rem;
                     font-size: 5rem;
                     color: var(--color-brand-primary);
-
-                    // background: radial-gradient(circle closest-side, var(--color-brand-primary) 100%, transparent);
                   `}
                 />
               )}
@@ -341,7 +341,14 @@ function renderColumn(column, i) {
                   `}
                 />
               )}
-              {map && <Map center={JSON.parse(map?.geo)?.coordinates?.reverse()?.join(',')} zoom={map.zoom} />}
+              {map && (
+                <Map
+                  center={JSON.parse(map?.geo)
+                    ?.coordinates?.reverse()
+                    ?.join(',')}
+                  zoom={map.zoom}
+                />
+              )}
               {grid && (
                 <Ul
                   css={`
@@ -511,11 +518,13 @@ export default function SidekickContainer({ header, columns }) {
 }
 
 SidekickContainer.propTypes = {
-  // icon:     string,
-  // tagline:  string,
-  // title:    string,
-  // subtitle: string,
-  // mdx:      string,
+  header: shape({
+    icon:     string,
+    tagline:  string,
+    title:    string,
+    subtitle: string,
+    mdx:      string,
+  }),
   columns: arrayOf(
     shape({
       blocks: arrayOf(
@@ -528,10 +537,6 @@ SidekickContainer.propTypes = {
 };
 
 SidekickContainer.defaultProps = {
-  // icon:     '',
-  // tagline:  '',
-  // title:    '',
-  // subtitle: '',
-  // mdx:      '',
+  header:  null,
   columns: [],
 };

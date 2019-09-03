@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { gql } from 'apollo-boost';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
 
-import { Form, Section, H1, P, Button, Input, Alert, Link, Text, Icon, Loader } from '~components';
+import { Form, Section, H1, P, Button, Input, Link, Text, AppError } from '~components';
 import { cardCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -103,51 +103,28 @@ export default function AccountDeleteContainer() {
           placeholder="Email"
           error="Your email has to be in the format of name@domain.com"
           required
+          autoFocus={!__DEV__}
           value={email}
           onChange={({ target }) => setEmail(target.value)}
         />
         <Button
           type="submit"
           look="primary"
-          disabled={loading}
+          disabled={loading || email === ''}
+          loading={loading}
           css={`
             grid-area: button;
-            cursor: ${loading && 'wait'} !important;
             background: var(--color-danger);
           `}
         >
-          {loading ? (
-            <Loader
-              css={`
-                --color: var(--hsl-inverse);
-                margin: 0 auto;
-              `}
-            />
-          ) : (
-            'Delete account'
-          )}
+          Delete account
         </Button>
-        {error && (
-          <Alert
-            type="danger"
-            css={`
-              grid-column: 1 / -1;
-              margin: 2rem 0 0;
-              font-weight: 700;
-
-              display: flex;
-              align-items: center;
-            `}
-          >
-            <Icon
-              icon="FaExclamationTriangle"
-              css={`
-                margin: 0 1rem 0 0;
-              `}
-            />
-            {error.graphQLErrors.map(err => err.message).join(', ')}
-          </Alert>
-        )}
+        <AppError
+          error={error}
+          errorMessages={{
+            400: 'Fill in the email field',
+          }}
+        />
       </Form>
       <P
         css={`

@@ -8,8 +8,8 @@ import { number, string, node, shape, bool } from 'prop-types';
 
 import { Ul, Li } from '~components/text/List';
 import { View } from '~components/primitives/View';
-import { Icon } from '~components/multimedia/Icon';
-import { Button } from '~components/interactive/Button';
+import Icon from '~components/multimedia/Icon';
+import Button from '~components/interactive/Button';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // helpers
@@ -173,7 +173,10 @@ Carousel.propTypes = {
     interval: number,
   }),
   isControls: bool,
-  css:        string,
+  itemProps:  shape({
+    css: string,
+  }),
+  css: string,
 };
 
 Carousel.defaultProps = {
@@ -181,5 +184,6 @@ Carousel.defaultProps = {
   gap:          '1rem',
   loop:         undefined,
   isControls:   true,
+  itemProps:    undefined,
   css:          '',
 };

@@ -1,0 +1,16 @@
+{
+  "translation": {
+    "error": {
+      "default": "Whoops, something went wrong, try again",
+      "500": "Error {{statusCode}}: Whoops, something went wrong on our end, try reloading the page",
+
+      "emailNotSent": "Email wasn't sent",
+      "invalidLogin": "Invalid password or email",
+      "linkExpired": "Password reset link has expired",
+      "userNotExist": "User doesn't exist",
+      "userExists": "Email or username already taken",
+      "userNotDeleted": "User account wasn't removed",
+      "changesNotSaved": "We couldn't save your changes"
+    }
+  }
+}
