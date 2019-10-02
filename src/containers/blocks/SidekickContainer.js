@@ -125,11 +125,13 @@ function renderHeader(item, i) {
         <Icon
           icon={item.icon}
           css={`
-            display: block;
             margin: 0 auto 2rem;
-
             font-size: 6rem;
-            color: var(--color-brand-primary);
+
+            background: var(--color-primary);
+            color: var(--color-inverse);
+            clip-path: circle();
+            padding: 0.25em;
           `}
         />
       )}
@@ -137,7 +139,7 @@ function renderHeader(item, i) {
         <P
           as="span"
           css={`
-            color: var(--color-brand-primary);
+            color: var(--color-primary);
             text-transform: uppercase;
             letter-spacing: 0.1em;
             font-size: 1.5rem;
@@ -199,7 +201,7 @@ function renderHeader(item, i) {
             flex-wrap: wrap;
           `}
         >
-          {item.buttons.map(button => (
+          {item.buttons.map((button) => (
             <Li
               key={button.url}
               css={`
@@ -271,7 +273,11 @@ function renderColumn(column, i) {
                   css={`
                     margin: 0 0 1rem;
                     font-size: 5rem;
-                    color: var(--color-brand-primary);
+
+                    background: var(--color-primary);
+                    color: var(--color-inverse);
+                    clip-path: circle();
+                    padding: 0.25em;
                   `}
                 />
               )}
@@ -279,7 +285,7 @@ function renderColumn(column, i) {
                 <P
                   as="span"
                   css={`
-                    color: var(--color-brand-primary);
+                    color: var(--color-primary);
                     text-transform: uppercase;
                     letter-spacing: 0.1em;
                     font-size: 1.5rem;
@@ -357,7 +363,7 @@ function renderColumn(column, i) {
                     margin: 4rem 0 0;
                   `}
                 >
-                  {grid.map(item => (
+                  {grid.map((item) => (
                     <Li key={item.title || item.icon || item.image || item.mdx}>
                       {item.icon && (
                         <Icon
@@ -365,7 +371,11 @@ function renderColumn(column, i) {
                           css={`
                             font-size: 4rem;
                             line-height: 1;
-                            color: var(--color-brand-primary);
+
+                            background: var(--color-primary);
+                            color: var(--color-inverse);
+                            clip-path: circle();
+                            padding: 0.25em;
                           `}
                         />
                       )}
@@ -404,7 +414,7 @@ function renderColumn(column, i) {
                     : `flex-${column.textAlign}`};
                   `}
                 >
-                  {buttons.map(button => (
+                  {buttons.map((button) => (
                     <Li
                       key={button.url}
                       css={`
@@ -506,7 +516,7 @@ export default function SidekickContainer({ header, columns }) {
             @media screen and (min-width: 900px) {
               grid-template-columns: ${columns.length > 4
             ? 'repeat(auto-fit, minmax(30ch, 1fr))'
-            : columns.map(column => column.width).join(' ')};
+            : columns.map((column) => column.width).join(' ')};
             }
           `}
         >
@@ -518,13 +528,11 @@ export default function SidekickContainer({ header, columns }) {
 }
 
 SidekickContainer.propTypes = {
-  header: shape({
-    icon:     string,
-    tagline:  string,
-    title:    string,
-    subtitle: string,
-    mdx:      string,
-  }),
+  // icon:     string,
+  // tagline:  string,
+  // title:    string,
+  // subtitle: string,
+  // mdx:      string,
   columns: arrayOf(
     shape({
       blocks: arrayOf(
@@ -537,6 +545,10 @@ SidekickContainer.propTypes = {
 };
 
 SidekickContainer.defaultProps = {
-  header:  null,
+  // icon:     '',
+  // tagline:  '',
+  // title:    '',
+  // subtitle: '',
+  // mdx:      '',
   columns: [],
 };

@@ -9,7 +9,7 @@ import styled from 'styled-components';
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const Tooltip = styled.div`
-  --color: var(--color-brand-primary); /* used to change chevron with background */
+  --color: var(--color-primary); /* used to change chevron with background */
 
   position: absolute;
   background: var(--color);

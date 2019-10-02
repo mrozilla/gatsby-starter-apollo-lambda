@@ -3,21 +3,21 @@
 /* ────────────────────────────────────────────────────────────────────────── */
 
 :root {
-  --hsl-brand-primary: 211, 100%, 50%;
-  --color-brand-primary: hsl(var(--hsl-brand-primary));
-  --hsl-brand-secondary: 201, 100%, 50%;
-  --color-brand-secondary: hsl(var(--hsl-brand-secondary));
+  --hsl-primary: 211, 100%, 50%;
+  --color-primary: hsl(var(--hsl-primary));
+  --hsl-secondary: 201, 100%, 50%;
+  --color-secondary: hsl(var(--hsl-secondary));
 
   --gradient-brand: linear-gradient(
     to top right,
-    var(--color-brand-primary),
-    var(--color-brand-secondary)
+    var(--color-primary),
+    var(--color-secondary)
   );
 
   --hsl-bg: 0, 0%, 99%;
   --color-bg: hsl(var(--hsl-bg));
 
-  --hsl-text: 200, 5%, 35%;
+  --hsl-text: 211, 5%, 35%;
   --color-text: hsl(var(--hsl-text));
 
   --hsl-inverse: 0, 0%, 100%;

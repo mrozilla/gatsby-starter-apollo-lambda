@@ -22,7 +22,7 @@ export const StyledToast = styled.aside`
 
   text-align: center;
   color: var(--color-inverse);
-  background: var(--color-brand-primary);
+  background: var(--color-primary);
 
   &[open] {
     visibility: visible;

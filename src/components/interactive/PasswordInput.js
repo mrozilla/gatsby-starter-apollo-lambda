@@ -70,7 +70,7 @@ export default function PasswordInput({ type, onChange, ...rest }) {
 
           &:hover {
             opacity: 1;
-            color: var(--color-brand-primary);
+            color: var(--color-primary);
           }
         `}
         onClick={handleVisibility}

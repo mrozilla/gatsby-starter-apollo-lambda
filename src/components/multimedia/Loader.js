@@ -10,7 +10,7 @@ import { animation } from '~utils';
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const Loader = styled.progress`
-  --hsl: var(--hsl-brand-primary);
+  --hsl: var(--hsl-primary);
 
   appearance: none;
   display: inline-block;
