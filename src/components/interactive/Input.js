@@ -14,6 +14,7 @@ import { Radio } from '~components/interactive/Radio';
 import { Select } from '~components/interactive/Select';
 import TextInput from '~components/interactive/TextInput';
 import PasswordInput from '~components/interactive/PasswordInput';
+import TemporalInput from '~components/interactive/TemporalInput';
 import TextAreaInput from '~components/interactive/TextAreaInput';
 
 import { Label } from '~components/text/Label';
@@ -57,7 +58,7 @@ const Input = forwardRef(
         return (
           <>
             {label && <Legend>{label}</Legend>}
-            {options.map(radio => (
+            {options.map((radio) => (
               <Label
                 key={radio.value}
                 htmlFor={radio.value}
@@ -88,7 +89,7 @@ const Input = forwardRef(
         return (
           <>
             {label && <Legend>{label}</Legend>}
-            {options.map(checkbox => (
+            {options.map((checkbox) => (
               <Label
                 key={checkbox.value}
                 htmlFor={checkbox.value}
@@ -123,7 +124,7 @@ const Input = forwardRef(
                 {placeholder}
               </option>
               <optgroup label={placeholder}>
-                {options.map(option => (
+                {options.map((option) => (
                   <option key={option.value} value={option.value} selected={option.selected}>
                     {option.label}
                   </option>
@@ -178,7 +179,7 @@ const Input = forwardRef(
               {label}
             </Label>
             <datalist id={`datalist-${name}`}>
-              {options.map(option => (
+              {options.map((option) => (
                 <option key={option.name}>{option.name}</option>
               ))}
             </datalist>
@@ -234,6 +235,43 @@ const Input = forwardRef(
         return (
           <>
             <PasswordInput
+              ref={ref}
+              id={name}
+              {...{
+                type,
+                name,
+                value,
+                placeholder,
+                pattern,
+                min,
+                max,
+                step,
+                readOnly,
+                required,
+                onChange,
+              }}
+              {...rest}
+            />
+            <Label
+              htmlFor={name}
+              css={`
+                position: absolute;
+                top: 0;
+                left: 1rem;
+              `}
+            >
+              {label}
+            </Label>
+            {description && <Tooltip>{description}</Tooltip>}
+            {error && <Error>{error}</Error>}
+          </>
+        );
+      }
+
+      if (['date', 'time', 'month'].some((option) => option === type)) {
+        return (
+          <>
+            <TemporalInput
               ref={ref}
               id={name}
               {...{
