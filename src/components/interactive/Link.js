@@ -13,7 +13,7 @@ import styled, { css } from 'styled-components';
 // ─────────────────────────────────────────────────────────────────────────────
 
 const StyledLink = styled.a`
-  --color: var(--color-brand-primary);
+  --color: var(--color-primary);
 
   outline: none;
 

@@ -66,7 +66,7 @@ const StyledButton = styled.button`
     if (look === 'primary-inverse') {
       return css`
         background: var(--color-inverse);
-        color: var(--color-brand-primary);
+        color: var(--color-primary);
 
         &:not(:disabled):hover,
         &:not(:disabled):focus {
@@ -74,14 +74,14 @@ const StyledButton = styled.button`
         }
 
         & > ${Loader} {
-          --hsl: var(--hsl-brand-primary);
+          --hsl: var(--hsl-primary);
         }
       `;
     }
 
     if (look === 'secondary') {
       return css`
-        --color: var(--hsl-brand-primary);
+        --color: var(--hsl-primary);
 
         box-shadow: inset 0 0 0 2px hsla(var(--color), 1);
         color: hsla(var(--color), 1);
@@ -94,7 +94,7 @@ const StyledButton = styled.button`
         }
 
         & > ${Loader} {
-          --hsl: var(--hsl-brand-primary);
+          --hsl: var(--hsl-primary);
         }
       `;
     }
@@ -120,10 +120,10 @@ const StyledButton = styled.button`
       return css`
         &:not(:disabled):hover,
         &:not(:disabled):focus {
-          color: var(--color-brand-primary);
+          color: var(--color-primary);
 
           & > ${Loader} {
-            --hsl: var(--hsl-brand-primary);
+            --hsl: var(--hsl-primary);
           }
         }
 

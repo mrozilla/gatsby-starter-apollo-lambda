@@ -119,7 +119,7 @@ export default function HeaderContainer() {
                       padding: 1rem;
 
                       &:hover {
-                        color: var(--color-brand-primary);
+                        color: var(--color-primary);
                       }
 
                       @media screen and (min-width: 1200px) {

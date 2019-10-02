@@ -102,7 +102,7 @@ export default function HeroContainer({
           to={announcement.url}
           css={`
             background: hsla(var(${
-              backgroundImage ? '--hsl-inverse' : '--hsl-brand-primary'
+              backgroundImage ? '--hsl-inverse' : '--hsl-primary'
             }), 0.05);
             border-radius: 999px;
             padding: 0.25rem 1rem 0.25rem 0.25rem;
@@ -126,7 +126,7 @@ export default function HeroContainer({
         >
           <Text
             css={`
-              color: var(${backgroundImage ? '--color-inverse' : '--color-brand-primary'});
+              color: var(${backgroundImage ? '--color-inverse' : '--color-primary'});
             `}
           >
             {announcement.body}

@@ -63,7 +63,7 @@ Nav.List.Item = styled.li`
     &:focus-within {
       ${({ isUnderline }) => isUnderline
         && css`
-          box-shadow: inset 0 -2px var(--color-brand-primary);
+          box-shadow: inset 0 -2px var(--color-primary);
         `}
 
       & > ${Nav.List} {
@@ -73,8 +73,8 @@ Nav.List.Item = styled.li`
         box-shadow: 0 0.5rem 1rem hsla(var(--hsl-text), 0.1);
 
         & > ${Nav.List.Item}:hover {
-          background: hsla(var(--hsl-brand-primary), 0.025);
-          color: var(--color-brand-primary);
+          background: hsla(var(--hsl-primary), 0.025);
+          color: var(--color-primary);
         }
       }
     }
@@ -91,7 +91,7 @@ Nav.Toggle = styled.input`
   cursor: pointer;
   font-size: 2rem;
   line-height: 1;
-  color: var(--color-brand-primary);
+  color: var(--color-primary);
 
   &:checked {
     transform: rotate(90deg);

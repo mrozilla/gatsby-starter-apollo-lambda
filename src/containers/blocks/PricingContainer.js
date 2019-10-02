@@ -95,7 +95,7 @@ export default function PricingContainer({ title, subtitle, mdx, pricing }) {
               css={`
                 padding: 1rem;
                 font-weight: 400;
-                color: ${frequency === 'monthly' ? 'var(--color-brand-primary)' : ''};
+                color: ${frequency === 'monthly' ? 'var(--color-primary)' : ''};
               `}
               onClick={() => setFrequency('monthly')}
             >
@@ -105,7 +105,7 @@ export default function PricingContainer({ title, subtitle, mdx, pricing }) {
               css={`
                 padding: 1rem;
                 font-weight: 400;
-                color: ${frequency === 'yearly' ? 'var(--color-brand-primary)' : ''};
+                color: ${frequency === 'yearly' ? 'var(--color-primary)' : ''};
               `}
               onClick={() => setFrequency('yearly')}
             >
