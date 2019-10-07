@@ -51,7 +51,7 @@ export default function PasswordInput({ type, onChange, ...rest }) {
   const handleFocus = () => inputRef.current.focus();
   const handleVisibility = () => {
     handleFocus();
-    setIsHidden(prev => !prev);
+    setIsHidden((prev) => !prev);
   };
 
   return (
@@ -65,11 +65,10 @@ export default function PasswordInput({ type, onChange, ...rest }) {
           top: 2.5rem;
           right: 3rem;
           cursor: pointer;
-          opacity: 0.5;
+          color: hsla(var(--hsl-text), 0.25);
           padding: 0;
 
           &:hover {
-            opacity: 1;
             color: var(--color-primary);
           }
         `}

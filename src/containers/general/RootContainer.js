@@ -22,8 +22,8 @@ export default function RootContainer({ children }) {
   return (
     <MDXProvider
       components={{
-        a:  props => <Link look="primary" {...props} />,
-        h3: props => (
+        a:  (props) => <Link look="primary" {...props} />,
+        h3: (props) => (
           <H3
             css={`
               font-size: 2.5rem;
@@ -33,7 +33,7 @@ export default function RootContainer({ children }) {
             {...props}
           />
         ),
-        ul: props => (
+        ul: (props) => (
           <Ul
             css={`
               list-style: disc;
@@ -43,7 +43,7 @@ export default function RootContainer({ children }) {
             {...props}
           />
         ),
-        ol: props => (
+        ol: (props) => (
           <Ol
             css={`
               list-style: decimal;
@@ -56,7 +56,7 @@ export default function RootContainer({ children }) {
             {...props}
           />
         ),
-        p: props => (
+        p: (props) => (
           <P
             css={`
               margin: 0 0 1rem;

@@ -3,6 +3,8 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { gql } from 'apollo-boost';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
 
@@ -15,14 +17,14 @@ import { cardCSS } from '~utils';
 
 export default function AccountDeleteContainer() {
   const [email, setEmail] = useState(__DEV__ ? 'jan@mrozilla.cz' : '');
-
-  const [mutate, { loading, error, data = {} }] = useMutation(gql`
-    mutation($email: Email!) {
-      delete(email: $email)
-    }
-  `);
+  const { t } = useTranslation();
 
   const client = useApolloClient();
+  const [mutate, { loading, error, data = {} }] = useMutation(gql`
+    mutation($email: Email!) {
+      removeUser(email: $email)
+    }
+  `);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,7 +37,7 @@ export default function AccountDeleteContainer() {
     }
   };
 
-  if (data.delete) {
+  if (data.removeUser) {
     return (
       <Section
         css={`
@@ -53,10 +55,10 @@ export default function AccountDeleteContainer() {
             margin: 0 0 2rem;
           `}
         >
-          Your account has been deleted
+          {t('delete.success.title')}
         </H1>
         <Link to={__DEV__ ? '/u/login/' : '/'} look="primary">
-          Back to homepage
+          {t('delete.success.link')}
         </Link>
       </Section>
     );
@@ -86,24 +88,23 @@ export default function AccountDeleteContainer() {
             font-size: 2.5rem;
           `}
         >
-          Are you sure you want permanently to delete your account?
+          {t('delete.form.title')}
         </H1>
         <P
           css={`
             margin: 0 0 2rem;
           `}
         >
-          All your data will be deleted. You will not be able to undo this action. Please type in
-          your email to confirm:
+          {t('delete.form.description')}
         </P>
         <Input
           type="email"
           name="email"
-          label="Email"
-          placeholder="Email"
-          error="Your email has to be in the format of name@domain.com"
-          required
+          label={t('delete.form.input.email.label')}
+          placeholder={t('delete.form.input.email.placeholder')}
+          error={t('delete.form.input.email.error')}
           autoFocus={!__DEV__}
+          required
           value={email}
           onChange={({ target }) => setEmail(target.value)}
         />
@@ -117,7 +118,7 @@ export default function AccountDeleteContainer() {
             background: var(--color-danger);
           `}
         >
-          Delete account
+          {t('delete.form.button.submit')}
         </Button>
         <AppError
           error={error}
@@ -138,10 +139,10 @@ export default function AccountDeleteContainer() {
             opacity: 0.5;
           `}
         >
-          Want to keep your account?{' '}
+          {t('delete.links.back.intro')}{' '}
         </Text>
         <Link to="/u/settings/" look="secondary">
-          Go back
+          {t('delete.links.back.link')}
         </Link>
       </P>
     </>

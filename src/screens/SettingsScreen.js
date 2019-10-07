@@ -3,16 +3,19 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { navigate } from '@reach/router';
 
 import { RootContainer, AppHeaderContainer, AccountInformationContainer } from '~containers';
-import { Main, Section, H1, H2, Link, Button } from '~components';
-import { cardCSS } from '~utils';
+import { Main, Section, H1, H2, Button } from '~components';
+import { cardCSS, titleCSS } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function SettingsScreen() {
+  const { t } = useTranslation();
   return (
     <RootContainer>
       <AppHeaderContainer />
@@ -31,13 +34,10 @@ export default function SettingsScreen() {
         >
           <H1
             css={`
-              font-weight: 700;
-              font-size: 4rem;
-              line-height: 4rem;
-              margin: 0 0 2rem;
+              ${titleCSS}
             `}
           >
-            Settings
+            {t('settings.menu.title')}
           </H1>
         </Section>
         <Section
@@ -59,17 +59,16 @@ export default function SettingsScreen() {
                 margin: 0 0 2rem;
               `}
             >
-              Danger zone
+              {t('settings.danger.title')}
             </H2>
             <Button
-              as={Link}
-              to="/u/delete/"
               look="secondary"
               css={`
                 --color: var(--hsl-danger);
               `}
+              onClick={() => navigate('/u/delete/')}
             >
-              Delete account
+              {t('delete.button')}
             </Button>
           </Section>
         </Section>

@@ -89,6 +89,7 @@ input,
 select,
 pre,
 iframe,
+menu,
 hr,
 h1,
 h2,
@@ -119,19 +120,13 @@ input,
 select,
 textarea {
   color: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  font-family: inherit;
-}
-
-html {
-  box-sizing: border-box;
+  font: inherit;
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
+  box-sizing: border-box;
 }
 
 img,

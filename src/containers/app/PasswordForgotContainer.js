@@ -3,6 +3,8 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 
@@ -15,6 +17,7 @@ import { cardCSS } from '~utils';
 
 export default function PasswordForgotContainer() {
   const [email, setEmail] = useState(__DEV__ ? 'jan@mrozilla.cz' : '');
+  const { t } = useTranslation();
 
   const [mutate, { loading, error, data = {} }] = useMutation(gql`
     mutation($email: Email!) {
@@ -49,9 +52,9 @@ export default function PasswordForgotContainer() {
             margin: 0 0 2rem;
           `}
         >
-          Check your email!
+          {t('passwordForgot.success.title')}
         </H1>
-        <P>We have sent an email to {email} with a link to reset your password.</P>
+        <P>{t('passwordForgot.success.description', { email })}</P>
         {__DEV__ && data.requestPasswordReset && (
           <Link to={`/u/reset/?token=${data.requestPasswordReset}`} look="primary">
             [DEV] Skip email
@@ -85,14 +88,14 @@ export default function PasswordForgotContainer() {
             margin: 0 0 2rem;
           `}
         >
-          Enter your email address and we’ll send you a link to reset your password.
+          {t('passwordForgot.form.title')}
         </H1>
         <Input
           type="email"
           name="email"
-          label="Email"
-          placeholder="Email"
-          error="Your email has to be in the format of name@domain.com"
+          label={t('passwordForgot.form.input.email.label')}
+          placeholder={t('passwordForgot.form.input.email.placeholder')}
+          error={t('passwordForgot.form.input.email.error')}
           required
           value={email}
           onChange={({ target }) => setEmail(target.value)}
@@ -106,7 +109,7 @@ export default function PasswordForgotContainer() {
             grid-area: button;
           `}
         >
-          Send password reset link
+          {t('passwordForgot.form.button.submit')}
         </Button>
         <AppError
           error={error}
@@ -127,10 +130,10 @@ export default function PasswordForgotContainer() {
             opacity: 0.5;
           `}
         >
-          Remembered?{' '}
+          {t('passwordForgot.links.login.intro')}{' '}
         </Text>
         <Link to="/u/login/" look="secondary">
-          Back to login
+          {t('passwordForgot.links.login.link')}
         </Link>
       </P>
     </>

@@ -3,7 +3,9 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { string } from 'prop-types';
+
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 
@@ -16,6 +18,7 @@ import { cardCSS } from '~utils';
 
 export default function PasswordResetContainer({ token }) {
   const [password, setPassword] = useState(__DEV__ ? '43214321' : '');
+  const { t } = useTranslation();
 
   const [mutate, { loading, error, data = {} }] = useMutation(gql`
     mutation($token: String!, $password: String!) {
@@ -50,7 +53,7 @@ export default function PasswordResetContainer({ token }) {
             margin: 0 0 2rem;
           `}
         >
-          Your password reset link has expired
+          {t('passwordReset.failure.title')}
         </H1>
         <P>
           <Link
@@ -60,9 +63,8 @@ export default function PasswordResetContainer({ token }) {
               font-weight: 700;
             `}
           >
-            Try again
-          </Link>{' '}
-          with a new link
+            {t('passwordReset.failure.link')}
+          </Link>
         </P>
       </Section>
     );
@@ -86,7 +88,7 @@ export default function PasswordResetContainer({ token }) {
             margin: 0 0 2rem;
           `}
         >
-          Your password has been successfully reset
+          {t('passwordReset.success.title')}
         </H1>
         <P>
           <Link
@@ -96,9 +98,8 @@ export default function PasswordResetContainer({ token }) {
               font-weight: 700;
             `}
           >
-            Log in
-          </Link>{' '}
-          to your account
+            {t('passwordReset.success.link')}
+          </Link>
         </P>
       </Section>
     );
@@ -128,15 +129,15 @@ export default function PasswordResetContainer({ token }) {
           margin: 0 0 2rem;
         `}
       >
-        Enter your new password
+        {t('passwordReset.form.title')}
       </H1>
       <Input
         type="password"
         name="password"
-        label="Password"
-        placeholder="Password"
+        label={t('passwordReset.form.input.password.label')}
+        placeholder={t('passwordReset.form.input.password.placeholder')}
+        error={t('passwordReset.form.input.password.error')}
         pattern="^\S{8,}$"
-        error="Your password has to be at least 8 characters long"
         required
         value={password}
         onChange={({ target }) => setPassword(target.value)}
@@ -149,7 +150,7 @@ export default function PasswordResetContainer({ token }) {
           grid-area: button;
         `}
       >
-        Save new password
+        {t('passwordReset.form.button.submit')}
       </Button>
     </Form>
   );

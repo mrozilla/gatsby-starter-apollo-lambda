@@ -31,6 +31,21 @@ i18n
 
     interpolation: {
       escapeValue: false, // react already safes from xss
+      format:      (value, format, language) => {
+        if (format === 'intlDate') {
+          const formatter = new Intl.DateTimeFormat(language);
+          return formatter.format(value);
+        }
+        if (format === 'intlCurrency') {
+          const formatter = new Intl.NumberFormat(language, {
+            style:    'currency',
+            currency: value.currency,
+          });
+          return formatter.format(value.amount);
+        }
+
+        return value;
+      },
     },
   });
 

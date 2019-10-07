@@ -33,17 +33,16 @@ const ModalBackground = styled.aside`
 `;
 
 const ModalWrapper = styled.div`
-  --shadow: inset 0 0 0 2px hsla(var(--hsl-text), 0.1);
-
   cursor: initial;
 
   min-width: 25vw;
+  max-width: 450px;
 
   position: relative;
 
   border-radius: 0.5rem;
   background: var(--color-inverse);
-  box-shadow: var(--shadow);
+  box-shadow: var(--border-box-shadow);
   animation: ${animation({
     from: {
       opacity:   0,
@@ -94,11 +93,12 @@ export default function Modal({
           key={innerKey}
           css={`
             padding: ${innerPadding};
-            minwidth: ${innerMinWidth};
+            min-width: ${innerMinWidth};
           `}
         >
           {children}
           <Button
+            look="tertiary"
             css={`
               position: absolute;
               top: 0;

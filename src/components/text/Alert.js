@@ -11,6 +11,7 @@ import styled, { css } from 'styled-components';
 // prettier-ignore
 export const Alert = styled.span`
   display: inline-flex;
+  align-items: center;
 
   line-height: 3rem;
   padding: 1rem;

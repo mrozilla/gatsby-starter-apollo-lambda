@@ -3,19 +3,22 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React, { useEffect } from 'react';
-import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import { useTranslation } from 'react-i18next';
 import { navigate } from '@reach/router';
 
-import { Header, Nav, Link, Logo, Loader } from '~components';
-import DarkModeContainer from '~containers/DarkModeContainer';
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
+
+import DarkModeContainer from '~containers/general/DarkModeContainer';
 import LogoutContainer from '~containers/app/LogoutContainer';
+import { Header, Nav, Link, Logo, TextLoader } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function AppHeaderContainer() {
+  const { t } = useTranslation();
   const { loading, error, data = {} } = useQuery(gql`
     query {
       me {
@@ -31,12 +34,25 @@ export default function AppHeaderContainer() {
   }, [error]);
 
   return (
-    <Header>
+    <Header
+      css={`
+        position: sticky;
+        z-index: var(--z-index-header);
+        top: 0;
+        width: 100%;
+        max-height: 100vh;
+
+        background: var(--color-inverse);
+        box-shadow: inset 0 -2px hsla(var(--hsl-text), 0.05);
+
+        padding: 0 var(--width-outside);
+      `}
+    >
       <Nav>
         <Link
           to="/u/"
           css={`
-            padding: 3.5rem 0;
+            padding: 2rem 0;
             display: flex;
             align-items: center;
           `}
@@ -49,10 +65,14 @@ export default function AppHeaderContainer() {
             right: -2rem;
           `}
         />
-        <Nav.List>
+        <Nav.List
+          css={`
+            justify-self: end;
+          `}
+        >
           {loading && (
             <Nav.List.Item>
-              <Loader />
+              <TextLoader>Username</TextLoader>
             </Nav.List.Item>
           )}
           {data?.me && (
@@ -77,7 +97,7 @@ export default function AppHeaderContainer() {
                       }
                     `}
                   >
-                    Settings
+                    {t('settings.menu.title')}
                   </Link>
                 </Nav.List.Item>
                 <Nav.List.Item>
