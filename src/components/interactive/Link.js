@@ -17,34 +17,36 @@ const StyledLink = styled.a`
 
   transition: all 250ms;
 
-  /* &[aria-current] {
-    font-weight: 700; /* TODO: investigate if better styling
-  } */
-
   ${({ look }) => {
     if (look === 'primary') {
       return css`
-        color: var(--color-brand-primary);
-        text-decoration: underline var(--color-brand-primary);
+        --color: var(--hsl-primary);
+        color: hsl(var(--color));
+        text-decoration: underline;
+        text-decoration-color: hsl(var(--color));
       `;
     }
     if (look === 'secondary') {
       return css`
-        color: var(--color-brand-primary);
+        --color: var(--hsl-primary);
+        color: hsl(var(--color));
         &:hover,
         &:focus,
         &:active {
-          text-decoration: underline var(--color-brand-primary);
+          text-decoration: underline;
+          text-decoration-color: hsl(var(--color));
         }
       `;
     }
     if (look === 'tertiary') {
       return css`
+        --color: var(--hsl-primary);
         &:hover,
         &:focus,
         &:active {
-          color: var(--color-brand-primary);
-          text-decoration: underline var(--color-brand-primary);
+          color: hsl(var(--color));
+          text-decoration: underline;
+          text-decoration-color: hsl(var(--color));
         }
       `;
     }
@@ -60,7 +62,7 @@ const StyledLink = styled.a`
 export default function Link({ href, to, children, ...rest }) {
   const link = href || to || '';
 
-  if (['http', 'mailto:', 'tel:', 'www.'].some(t => link.includes(t))) {
+  if (['http', 'mailto:', 'tel:', 'www.'].some((t) => link.includes(t))) {
     const externalLink = link.startsWith('www.') ? `https://${link}` : link;
     return (
       <StyledLink
@@ -83,10 +85,10 @@ export default function Link({ href, to, children, ...rest }) {
 
 Link.propTypes = {
   children: node.isRequired,
-  href:     string,
-  to:       string,
+  href: string,
+  to: string,
 };
 Link.defaultProps = {
   href: null,
-  to:   null,
+  to: null,
 };

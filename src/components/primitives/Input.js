@@ -22,7 +22,7 @@ export const Input = styled.input`
 
   display: block;
   width: 100%;
-  background-color: hsla(var(--hsl-text), 0.05);
+  background: hsla(var(--hsl-text), 0.05);
   line-height: 1.5em;
   padding: 2rem;
   border-radius: 0.5rem;
@@ -34,6 +34,7 @@ export const Input = styled.input`
   }
 
   &::placeholder {
+    color: inherit;
     opacity: 0.5;
   }
 
@@ -45,7 +46,7 @@ export const Input = styled.input`
       }
     }
     &:focus {
-      box-shadow: inset 0 0 0 2px var(--color-brand-primary);
+      box-shadow: inset 0 0 0 2px var(--color-primary);
       ::placeholder {
         opacity: 0.75;
       }
@@ -55,11 +56,6 @@ export const Input = styled.input`
       & ~ svg {
         fill: var(--color-info);
       }
-      & ~ ${Tooltip} {
-        visibility: visible;
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
   }
 
@@ -68,6 +64,12 @@ export const Input = styled.input`
   }
   &:placeholder-shown ~ ${Label} {
     display: none;
+  }
+
+  & ~ ${Label} {
+    position: absolute;
+    top: 0;
+    left: 1rem;
   }
 
   & ~ ${Error} {
@@ -82,10 +84,6 @@ export const Input = styled.input`
 
   &[type='select'],
   &[type='search'] {
-    &::after {
-      content: 'test';
-    }
-
     & ~ svg {
       position: absolute;
       bottom: 2rem;
@@ -131,32 +129,80 @@ export const Input = styled.input`
   }
 
   /**
-   * remove search input additional styling in webkit
+   * search input
    */
 
-  &[type='search']::-webkit-calendar-picker-indicator,
+  &[type='search']::-webkit-calendar-picker-indicator {
+    color: var(--color-primary);
+    cursor: pointer;
+  }
   &[type='search']::-webkit-search-cancel-button {
-    display: none;
+    background: var(--color-primary);
+    cursor: pointer;
   }
 
   /**
-   * add temporal fields placeholder, doesn't work in Firefox
+   * temporal fields styling
+   * 1. fix for temporal inputs size difference
    */
 
   &[type^='date'],
-  &[type='time'],
-  &[type='month'] {
-    &::before {
-      content: attr(placeholder) ':';
-      opacity: 0.25;
-      margin: 0 1rem 0 0;
-    }
+  &[type='month'],
+  &[type='week'],
+  &[type='time'] {
+    font-size: 1.9rem; /* 1 */
 
     &::-webkit-calendar-picker-indicator {
       color: var(--color-info);
     }
     &::-webkit-datetime-edit-text {
       opacity: 0.5;
+    }
+  }
+
+  /**
+   * color input
+   */
+
+  &[type='color'] {
+    /* &::-webkit-color-swatch-wrapper {
+      border: none;
+      padding: 1rem;
+      height: 1rem;
+    } */
+    &::-webkit-color-swatch {
+      /* border: none; */
+      padding: 1rem;
+      /* height: 1rem; */
+    }
+  }
+
+  /**
+   * range input
+   */
+
+  &[type='range'] {
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 2rem;
+      height: 2rem;
+      background: var(--color-inverse);
+      box-shadow: inset 0 0 0 2px hsla(var(--hsl-text), 0.2);
+      border-radius: 50%;
+      margin: -1rem 0 0;
+      cursor: pointer;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      &::-webkit-slider-thumb {
+        box-shadow: inset 0 0 0 2px hsla(var(--hsl-primary), 1);
+      }
+    }
+    &::-webkit-slider-runnable-track {
+      height: 0.25rem;
+      background: hsla(var(--hsl-text), 0.1);
+      margin: 1.5rem 0 1.25rem;
     }
   }
 `;

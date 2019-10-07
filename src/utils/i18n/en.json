@@ -1,0 +1,252 @@
+{
+  "translation": {
+
+    "error": {
+      "default": "Whoops, something went wrong, try again",
+      "500": "Error {{statusCode}}: Whoops, something went wrong on our end, try reloading the page",
+
+      "emailNotSent": "Email wasn't sent",
+      "invalidLogin": "Invalid password or email",
+      "linkExpired": "Password reset link has expired",
+      "userNotExist": "User doesn't exist",
+      "userExists": "Email or username already taken",
+      "userNotRemoved": "User account wasn't removed",
+      "changesNotSaved": "We couldn't save your changes"
+    },
+
+    "utils": {
+      "date": "{{date, intlDate}}",
+      "currency": "{{price, intlCurrency}}",
+      "darkMode": "Toggle dark mode"
+    },
+
+    "signup": {
+      "form": {
+        "title": "Create your account",
+        "input": {
+          "firstName": {
+            "label": "First name",
+            "placeholder": "First name...",
+            "error": "Please fill in your given name"
+          },
+          "lastName": {
+            "label": "Last name",
+            "placeholder": "Last name...",
+            "error": "Please fill in your family name"
+          },
+          "username": {
+            "label": "Username",
+            "placeholder": "Choose your username...",
+            "description": "Your username has to be at least 4 characters long",
+            "error": "Your username has to be at least 4 characters long"
+          },
+          "email": {
+            "label": "Email",
+            "placeholder": "Email...",
+            "error": "Your email has to be in the format of name@domain.com"
+          },
+          "password": {
+            "label": "Password",
+            "placeholder": "Password...",
+            "error": "Your password has to be at least 8 characters long"
+          }
+        },
+        "button": {
+          "submit": "Sign up for free"
+        }
+      },
+      "links": {
+        "terms": {
+          "intro": "By creating an account, you agree to our",
+          "link": "Terms of Service"
+        },
+        "login": {
+          "intro": "Already have an account?",
+          "link": "Log in"
+        }
+      }
+    },
+
+    "login": {
+      "form": {
+        "title": "Log in to your account",
+        "input": {
+          "usernameOrEmail": {
+            "label": "Username or email",
+            "placeholder": "Username or email...",
+            "error": "Your username or email is required"
+          },
+          "password": {
+            "label": "Password",
+            "placeholder": "Password...",
+            "error": "Your password has to be at least 8 characters long"
+          }
+        },
+        "button": {
+          "submit": "Log in"
+        }
+      },
+      "links": {
+        "reset": {
+          "intro": "Can't remember?",
+          "link": "Reset your password"
+        },
+        "signup": {
+          "intro": "Don't have an an account yet?",
+          "link": "Sign up"
+        }
+      }
+    },
+
+    "passwordForgot": {
+      "form": {
+        "title": "Enter your email address and we’ll send you a link to reset your password",
+        "input": {
+          "email": {
+            "label": "Email",
+            "placeholder": "Email...",
+            "error": "Your email has to be in the format of name@domain.com"
+          }
+        },
+        "button": {
+          "submit": "Send password reset link"
+        }
+      },
+      "links": {
+        "login": {
+          "intro": "Remembered?",
+          "link": "Back to login"
+        },
+        "signup": {
+          "intro": "Don't have an an account yet?",
+          "link": "Sign up"
+        }
+      },
+      "success": {
+        "title": "Check your email!",
+        "description": "We have sent an email to {{email}} with a link to reset your password."
+      }
+    },
+
+    "passwordReset": {
+      "form": {
+        "title": "Enter your new password",
+        "input": {
+          "password": {
+            "label": "Password",
+            "placeholder": "Password...",
+            "error": "Your password has to be at least 8 characters long"
+          }
+        },
+        "button": {
+          "submit": "Save new password"
+        }
+      },
+      "failure": {
+        "title": "Your password reset link has expired",
+        "link": "Try again with a new link"
+      },
+      "success": {
+        "title": "Your password has been successfully reset",
+        "link": "Log in to your account"
+      }
+    },
+
+    "emailVerify": {
+      "failure": {
+        "title": "Your email verification link has expired",
+        "button": "Send link again"
+      },
+      "sent": {
+        "title": "Check your email!",
+        "description": "We have sent you an email with a verification link."
+      },
+      "success": {
+        "title": "Your email has been successfully verified",
+        "link": "Go back to your account"
+      }
+    },
+
+    "delete": {
+      "button": "Delete account",
+      "form": {
+        "title": "Are you sure you want permanently to delete your account?",
+        "description": "All your data will be deleted. You will not be able to undo this action. Please type in your email to confirm:",
+        "input": {
+          "email": {
+            "label": "Email",
+            "placeholder": "Email...",
+            "error": "Your email has to be in the format of name@domain.com"
+          }
+        },
+        "button": {
+          "submit": "Delete account"
+        }
+      },
+      "success": {
+        "title": "Your account has been deleted",
+        "link": "Back to homepage"
+      },
+      "links": {
+        "back": {
+          "intro": "Want to keep your account?",
+          "link": "Go back"
+        }
+      }
+    },
+
+    "settings": {
+      "menu": {
+        "title": "Settings"
+      },
+
+      "account": {
+        "title": "Account information",
+        "form": {
+          "title": "Change {{modal}}",
+          "input": {
+            "firstName": {
+              "label": "First name",
+              "placeholder": "First name...",
+              "error": "Please fill in your given name"
+            },
+            "lastName": {
+              "label": "Last name",
+              "placeholder": "Last name..."
+            },
+            "username": {
+              "label": "Username",
+              "placeholder": "Choose your username...",
+              "description": "Your username has to be at least 4 characters long",
+              "error": "Your username has to be at least 4 characters long"
+            },
+            "email": {
+              "label": "Email",
+              "placeholder": "Email...",
+              "error": "Your email has to be in the format of name@domain.com",
+              "extra": "Your current email is {{email}}. Enter a new email and we will send you a verification code."
+            },
+            "newPassword": {
+              "label": "New password",
+              "placeholder": "New password...",
+              "error": "Your password has to be at least 8 characters long"
+            },
+            "password": {
+              "label": "Password",
+              "placeholder": "Password...",
+              "error": "Your password has to be at least 8 characters long"
+            }
+          },
+          "button": {
+            "cancel": "Cancel",
+            "submit": "Save changes"
+          }
+        }
+      },
+      
+      "danger": {
+        "title": "Danger zone"
+      }
+    }
+  }
+}

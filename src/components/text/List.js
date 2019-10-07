@@ -14,7 +14,7 @@ export const Ul = styled.ul`
   list-style: none;
 
   & > li::marker {
-    color: var(--color-brand-primary);
+    color: var(--color-primary);
   }
 `;
 
@@ -24,7 +24,7 @@ export const Ol = styled.ol`
   list-style: none;
 
   & > li::marker {
-    color: var(--color-brand-primary);
+    color: var(--color-primary);
   }
 `;
 

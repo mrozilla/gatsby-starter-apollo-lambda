@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { Main, Section, H1, P, Link } from '~components';
-import { RootContainer } from '~containers';
+import { RootContainer, HeaderContainer } from '~containers';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
@@ -13,6 +13,7 @@ import { RootContainer } from '~containers';
 export default function ErrorNotFoundPage() {
   return (
     <RootContainer>
+      <HeaderContainer />
       <Main
         css={`
           grid-template-columns: var(--width-outside) 1fr var(--width-outside);

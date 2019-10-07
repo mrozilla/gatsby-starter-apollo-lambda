@@ -19,18 +19,18 @@ export const Select = styled.select`
 
   display: block;
   width: 100%;
-  background-color: hsla(var(--hsl-text), 0.05);
+  background: hsla(var(--hsl-text), 0.05);
   line-height: 1.5em;
   cursor: pointer;
   padding: 3rem 1rem 1rem;
-  border-radius: '0.5rem';
+  border-radius: 0.5rem;
 
   &:hover {
     box-shadow: var(--shadow);
   }
 
   &:focus {
-    box-shadow: inset 0 0 0 2px var(--color-brand-primary);
+    box-shadow: inset 0 0 0 2px var(--color-primary);
   }
 
   &:hover,
@@ -38,12 +38,15 @@ export const Select = styled.select`
   &:active {
     & ~ svg {
       opacity: 1;
-      fill: var(--color-brand-primary);
+      fill: var(--color-primary);
     }
   }
 
   & ~ ${Label} {
     pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 1rem;
   }
 
   &:required:invalid {

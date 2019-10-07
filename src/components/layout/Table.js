@@ -3,6 +3,8 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from 'react';
+import { node } from 'prop-types';
+
 import styled from 'styled-components';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -26,6 +28,10 @@ export function Table({ children, ...rest }) {
   );
 }
 
+Table.propTypes = {
+  children: node.isRequired,
+};
+
 // ─────────────────────────────────────────────────────────────────────────────
 // thead
 // ─────────────────────────────────────────────────────────────────────────────
@@ -45,7 +51,7 @@ Table.Thead = styled.thead`
 
 Table.Tbody = styled.tbody`
   & tr:hover {
-    background-color: hsla(var(--hsl-text), 0.05);
+    background: hsla(var(--hsl-text), 0.05);
   }
 `;
 

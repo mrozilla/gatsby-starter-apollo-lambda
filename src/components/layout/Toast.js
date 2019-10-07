@@ -3,6 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React, { useState, useImperativeHandle, useEffect, forwardRef } from 'react';
+import { bool, string, node } from 'prop-types';
 import styled from 'styled-components';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -21,7 +22,7 @@ export const StyledToast = styled.aside`
 
   text-align: center;
   color: var(--color-inverse);
-  background-color: var(--color-brand-primary);
+  background: var(--color-primary);
 
   &[open] {
     visibility: visible;
@@ -32,7 +33,7 @@ export const StyledToast = styled.aside`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-function Toast({ isVisible = false, className, children }, ref) {
+const Toast = forwardRef(({ isVisible, className, children }, ref) => {
   const [{ isOpen, message, css, delay }, setState] = useState({
     isOpen:  isVisible,
     message: '',
@@ -40,7 +41,7 @@ function Toast({ isVisible = false, className, children }, ref) {
   });
 
   useImperativeHandle(ref, () => ({
-    show: config => setState({ isOpen: true, ...config }),
+    show: (config) => setState({ isOpen: true, ...config }),
     hide: () => setState({ isOpen: false }),
   }));
 
@@ -49,11 +50,25 @@ function Toast({ isVisible = false, className, children }, ref) {
     return () => clearTimeout(timeoutHelper);
   }, [isOpen, message, css]);
 
+  useEffect(() => {
+    setState({ isOpen: isVisible });
+  }, [isVisible]);
+
   return (
     <StyledToast className={className} css={css} open={isOpen}>
       {message || children}
     </StyledToast>
   );
-}
+});
 
-export default forwardRef(Toast);
+Toast.propTypes = {
+  isVisible: bool,
+  className: string,
+  children:  node.isRequired,
+};
+Toast.defaultProps = {
+  isVisible: false,
+  className: '',
+};
+
+export default Toast;

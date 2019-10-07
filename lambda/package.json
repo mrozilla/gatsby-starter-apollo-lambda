@@ -1,0 +1,17 @@
+{
+  "name": "graphql",
+  "license": "MIT",
+  "dependencies": {
+    "@sendgrid/mail": "^6.4.0",
+    "apollo-boost": "^0.4.4",
+    "apollo-server-lambda": "^2.9.5",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.1.0",
+    "graphql-scalars": "^1.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.3"
+  },
+  "scripts": {
+    "bump": "yarn upgrade-interactive --latest"
+  }
+}

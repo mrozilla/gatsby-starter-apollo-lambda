@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { FaPlayCircle, FaTimesCircle } from 'react-icons/fa';
 import { string } from 'prop-types';
 
-import { Button } from '~components/interactive/Button';
+import Button from '~components/interactive/Button';
 import { Aside } from '~components/layout/Aside';
 import { useEventListener } from '~utils';
 
@@ -58,7 +58,7 @@ export default function Video({ src, css, ...rest }) {
             height: 100%;
 
             padding: 1rem;
-            background-color: hsla(var(--hsl-dark), 0.75);
+            background: hsla(var(--hsl-dark), 0.75);
             z-index: var(--z-index-modal);
 
             display: grid;
