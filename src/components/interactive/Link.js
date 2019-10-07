@@ -23,7 +23,8 @@ const StyledLink = styled.a`
     if (look === 'primary') {
       return css`
         color: var(--color);
-        text-decoration: underline var(--color);
+        text-decoration: underline;
+        text-decoration-color: var(--color);
       `;
     }
     if (look === 'secondary') {
@@ -32,7 +33,8 @@ const StyledLink = styled.a`
         &:hover,
         &:focus,
         &:active {
-          text-decoration: underline var(--color);
+          text-decoration: underline;
+          text-decoration-color: var(--color);
         }
       `;
     }
@@ -42,7 +44,8 @@ const StyledLink = styled.a`
         &:focus,
         &:active {
           color: var(--color);
-          text-decoration: underline var(--color);
+          text-decoration: underline;
+          text-decoration-color: var(--color);
         }
       `;
     }
@@ -58,7 +61,7 @@ const StyledLink = styled.a`
 export default function Link({ href, to, children, ...rest }) {
   const link = href || to || '';
 
-  if (['http', 'mailto:', 'tel:', 'www.'].some(t => link.includes(t))) {
+  if (['http', 'mailto:', 'tel:', 'www.'].some((t) => link.includes(t))) {
     const externalLink = link.startsWith('www.') ? `https://${link}` : link;
     return (
       <StyledLink

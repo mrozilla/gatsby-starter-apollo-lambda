@@ -41,7 +41,7 @@ const Toast = forwardRef(({ isVisible, className, children }, ref) => {
   });
 
   useImperativeHandle(ref, () => ({
-    show: config => setState({ isOpen: true, ...config }),
+    show: (config) => setState({ isOpen: true, ...config }),
     hide: () => setState({ isOpen: false }),
   }));
 

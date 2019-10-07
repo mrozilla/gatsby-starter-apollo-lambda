@@ -39,3 +39,17 @@ export const cardCSS = css`
   box-shadow: var(--border-box-shadow);
   border-radius: var(--border-radius);
 `;
+
+export const titleCSS = css`
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 4rem;
+`;
+
+export const sidebarButtonCSS = css`
+  display: flex;
+  /* width: 50%; */
+  justify-content: flex-start;
+  padding: 1.5rem 2rem;
+  font-size: 1.75rem;
+`;

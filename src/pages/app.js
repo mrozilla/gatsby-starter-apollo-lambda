@@ -30,7 +30,11 @@ import '~utils/i18n';
 
 const client = new ApolloClient({
   uri:     '/.netlify/functions/graphql',
-  request: (operation) => {
+  request: async (operation) => {
+    if (__DEV__) {
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // simulates backend latency
+    }
+
     const token = localStorage.getItem('token');
     operation.setContext({
       headers: {

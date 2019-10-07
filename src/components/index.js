@@ -25,6 +25,7 @@ export { Footer } from './layout/Footer';
 export { Header } from './layout/Header';
 export { Main } from './layout/Main';
 export { default as Masonry } from './layout/Masonry';
+export { Menu } from './layout/Menu';
 export { default as Modal } from './layout/Modal';
 export { Nav } from './layout/Nav';
 export { Section } from './layout/Section';
@@ -51,7 +52,7 @@ export { Text } from './primitives/Text';
 export { View } from './primitives/View';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// text/
+// text
 // ─────────────────────────────────────────────────────────────────────────────
 
 export { Alert } from './text/Alert';
@@ -64,4 +65,9 @@ export { Legend } from './text/Legend';
 export { Ul, Ol, Li } from './text/List';
 export { P } from './text/P';
 export { default as Pre } from './text/Pre';
+export { TextLoader } from './text/TextLoader';
 export { Tooltip } from './text/Tooltip';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// composites
+// ─────────────────────────────────────────────────────────────────────────────

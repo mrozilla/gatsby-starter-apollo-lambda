@@ -3,6 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { RootContainer, SignupContainer, FooterContainer } from '~containers';
 import { Main, Section, P, Link, Text, Logo } from '~components';
@@ -12,6 +13,8 @@ import { Main, Section, P, Link, Text, Logo } from '~components';
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function SignupScreen() {
+  const { t } = useTranslation();
+
   return (
     <RootContainer>
       <Main
@@ -30,8 +33,15 @@ export default function SignupScreen() {
           <Link to="/">
             <Logo
               css={`
+                --color-icon: var(--color-inverse);
+                --color-type: var(--color-inverse);
+
                 margin: 0 4rem;
                 fill: var(--color-inverse);
+
+                &:hover {
+                  opacity: 0.9;
+                }
               `}
             />
           </Link>
@@ -50,7 +60,7 @@ export default function SignupScreen() {
                 opacity: 0.5;
               `}
             >
-              By creating an account, you agree to our{' '}
+              {t('signup.links.terms.intro')}{' '}
             </Text>
             <Link
               to="/legal/terms/"
@@ -59,7 +69,7 @@ export default function SignupScreen() {
                 --color: var(--color-inverse);
               `}
             >
-              Terms of Service
+              {t('signup.links.terms.link')}
             </Link>
           </P>
           <P
@@ -75,7 +85,7 @@ export default function SignupScreen() {
                 opacity: 0.5;
               `}
             >
-              Already have an account?{' '}
+              {t('signup.links.login.intro')}{' '}
             </Text>
             <Link
               to="/u/login/"
@@ -84,7 +94,7 @@ export default function SignupScreen() {
                 --color: var(--color-inverse);
               `}
             >
-              Log in
+              {t('signup.links.login.link')}
             </Link>
           </P>
         </Section>

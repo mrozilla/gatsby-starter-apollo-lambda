@@ -3,7 +3,9 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { string } from 'prop-types';
+
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 
@@ -15,6 +17,7 @@ import { cardCSS } from '~utils';
 // ─────────────────────────────────────────────────────────────────────────────
 
 function RequestEmailVerificationContainer() {
+  const { t } = useTranslation();
   const [requestEmailVerification, { loading, data = {} }] = useMutation(gql`
     mutation {
       requestEmailVerification
@@ -41,9 +44,9 @@ function RequestEmailVerificationContainer() {
             margin: 0 0 2rem;
           `}
         >
-          Check your email!
+          {t('emailVerify.sent.title')}
         </H1>
-        <P>We have sent you an email with a verification link.</P>
+        <P>{t('emailVerify.sent.description')}</P>
       </>
     );
   }
@@ -59,7 +62,7 @@ function RequestEmailVerificationContainer() {
           margin: 0 0 2rem;
         `}
       >
-        Your email verification link has expired
+        {t('emailVerify.failure.title')}
       </H1>
       <Button
         look="primary"
@@ -67,14 +70,15 @@ function RequestEmailVerificationContainer() {
         loading={loading}
         onClick={handleSendEmailVerification}
       >
-        Send link again
+        {t('emailVerify.failure.button')}
       </Button>
     </>
   );
 }
 
 export default function EmailVerificationContainer({ token }) {
-  const [verifyEmail, { error, data = {} }] = useMutation(gql`
+  const { t } = useTranslation();
+  const [verifyEmail, { data = {}, error }] = useMutation(gql`
     mutation($token: String!) {
       verifyEmail(token: $token)
     }
@@ -88,7 +92,7 @@ export default function EmailVerificationContainer({ token }) {
         console.warn({ ...err }); // eslint-disable-line no-console
       }
     }
-    if (token) asyncMutate();
+    asyncMutate();
   }, [token]);
 
   if (error) {
@@ -123,7 +127,7 @@ export default function EmailVerificationContainer({ token }) {
             margin: 0 0 2rem;
           `}
         >
-          Your email has been successfully verified
+          {t('emailVerify.success.title')}
         </H1>
         <P>
           <Link
@@ -133,9 +137,8 @@ export default function EmailVerificationContainer({ token }) {
               font-weight: 700;
             `}
           >
-            Go back
-          </Link>{' '}
-          to your account
+            {t('emailVerify.success.link')}
+          </Link>
         </P>
       </Section>
     );
@@ -151,6 +154,7 @@ export default function EmailVerificationContainer({ token }) {
     >
       <Loader
         css={`
+          display: block;
           margin: 0 auto;
         `}
       />

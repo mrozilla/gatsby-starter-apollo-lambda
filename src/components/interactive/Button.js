@@ -3,7 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from 'react';
-import { bool, node } from 'prop-types';
+import { bool, node, string } from 'prop-types';
 
 import styled, { css } from 'styled-components';
 
@@ -75,6 +75,26 @@ const StyledButton = styled.button`
 
         & > ${Loader} {
           --hsl: var(--hsl-primary);
+        }
+      `;
+    }
+
+    if (look === 'primary-app') {
+      return css`
+        --color: var(--hsl-primary);
+
+        background: hsla(var(--hsl-text), 0.05);
+        color: hsla(var(--hsl-text), 0.9);
+
+        &:not(:disabled):hover,
+        &:not(:disabled):focus {
+          background: hsla(var(--color), 0.15);
+          box-shadow: inset 0 0 0 2px hsla(var(--color), 0.1);
+          color: hsla(var(--color), 1);
+        }
+
+        & > ${Loader} {
+          --hsl: var(--color);
         }
       `;
     }
@@ -178,7 +198,9 @@ export default function Button({ loading, children, ...rest }) {
 Button.propTypes = {
   loading:  bool,
   children: node.isRequired,
+  type:     string,
 };
 Button.defaultProps = {
   loading: false,
+  type:    'button',
 };

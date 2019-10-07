@@ -3,6 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { RootContainer, LoginContainer, FooterContainer } from '~containers';
 import { Main, Section, P, Link, Text, Logo } from '~components';
@@ -12,6 +13,7 @@ import { Main, Section, P, Link, Text, Logo } from '~components';
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function LoginScreen() {
+  const { t } = useTranslation();
   return (
     <RootContainer>
       <Main
@@ -47,10 +49,10 @@ export default function LoginScreen() {
                 opacity: 0.5;
               `}
             >
-              Can&apos;t remember?{' '}
+              {t('login.links.reset.intro')}{' '}
             </Text>
             <Link to="/u/forgot/" look="secondary">
-              Reset your password
+              {t('login.links.reset.link')}
             </Link>
           </P>
           <P
@@ -65,10 +67,10 @@ export default function LoginScreen() {
                 opacity: 0.5;
               `}
             >
-              Don&apos;t have an an account yet?{' '}
+              {t('login.links.signup.intro')}{' '}
             </Text>
             <Link to="/u/signup/" look="secondary">
-              Sign up
+              {t('login.links.signup.link')}
             </Link>
           </P>
         </Section>

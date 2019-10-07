@@ -1,22 +1,23 @@
-export { default as CookieContainer } from './CookieContainer';
-export { default as FooterContainer } from './FooterContainer';
-export { default as HeaderContainer } from './HeaderContainer';
-export { default as RootContainer } from './RootContainer';
-export { default as SEOContainer } from './SEOContainer';
-export { default as HighlightShareContainer } from './HighlightShareContainer';
-export { default as BreadcrumbsContainer } from './BreadcrumbsContainer';
-export { default as DarkModeContainer } from './DarkModeContainer';
+// general
+export { default as CookieContainer } from './general/CookieContainer';
+export { default as FooterContainer } from './general/FooterContainer';
+export { default as HeaderContainer } from './general/HeaderContainer';
+export { default as RootContainer } from './general/RootContainer';
+export { default as SEOContainer } from './general/SEOContainer';
+export { default as HighlightShareContainer } from './general/HighlightShareContainer';
+export { default as BreadcrumbsContainer } from './general/BreadcrumbsContainer';
+export { default as DarkModeContainer } from './general/DarkModeContainer';
 
-// blocks
-export { default as HeroContainer } from './blocks/HeroContainer';
-export { default as SidekickContainer } from './blocks/SidekickContainer';
-export { default as TestimonialsContainer } from './blocks/TestimonialsContainer';
-export { default as LogosContainer } from './blocks/LogosContainer';
-export { default as PricingContainer } from './blocks/PricingContainer';
-export { default as BlogContainer } from './blocks/BlogContainer';
-export { default as FAQContainer } from './blocks/FAQContainer';
-export { default as PeopleContainer } from './blocks/PeopleContainer';
-export { default as JobsContainer } from './blocks/JobsContainer';
+// web
+export { default as HeroContainer } from './web/HeroContainer';
+export { default as SidekickContainer } from './web/SidekickContainer';
+export { default as TestimonialsContainer } from './web/TestimonialsContainer';
+export { default as LogosContainer } from './web/LogosContainer';
+export { default as PricingContainer } from './web/PricingContainer';
+export { default as BlogContainer } from './web/BlogContainer';
+export { default as FAQContainer } from './web/FAQContainer';
+export { default as PeopleContainer } from './web/PeopleContainer';
+export { default as JobsContainer } from './web/JobsContainer';
 
 // app
 export { default as AppHeaderContainer } from './app/AppHeaderContainer';
@@ -28,5 +29,4 @@ export { default as LogoutContainer } from './app/LogoutContainer';
 export { default as PasswordForgotContainer } from './app/PasswordForgotContainer';
 export { default as PasswordResetContainer } from './app/PasswordResetContainer';
 export { default as AccountDeleteContainer } from './app/AccountDeleteContainer';
-
 export { default as AccountInformationContainer } from './app/AccountInformationContainer';

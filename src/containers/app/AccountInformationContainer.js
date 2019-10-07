@@ -3,18 +3,45 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 
-import { Form, Input, H1, Button, Icon, H2, P, Text, Modal, Section, AppError } from '~components';
-import { emptyLoaderCSS, cardCSS } from '~utils';
+import {
+  Form,
+  Input,
+  H1,
+  Menu,
+  Button,
+  Icon,
+  H2,
+  P,
+  Text,
+  Modal,
+  Section,
+  TextLoader,
+  AppError,
+} from '~components';
+import { cardCSS, useInputs } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function AccountInformationContainer() {
-  const { data = {} } = useQuery(gql`
+  const [inputs, handleInput, setInputs] = useInputs({
+    firstName:   '',
+    lastName:    '',
+    username:    '',
+    email:       '',
+    password:    __DEV__ ? '12341234' : '',
+    newPassword: __DEV__ ? '' : '',
+  });
+  const [modal, setModal] = useState('');
+  const { t } = useTranslation();
+
+  const { data = {}, loading } = useQuery(gql`
     {
       me {
         _id
@@ -26,19 +53,9 @@ export default function AccountInformationContainer() {
     }
   `);
 
-  const [inputs, setInputs] = useState({
-    firstName:   '',
-    lastName:    '',
-    username:    '',
-    email:       '',
-    password:    __DEV__ ? '12341234' : '',
-    newPassword: __DEV__ ? '' : '',
-  });
-  const [modal, setModal] = useState('');
-
   useEffect(() => {
     const { __typename, ...rest } = data.me || {}; // __typename returned even if not part of query
-    setInputs(prev => ({ ...prev, ...rest }));
+    setInputs((prev) => ({ ...prev, ...rest }));
   }, [data.me]);
 
   const [mutate, { loading: mLoading, error }] = useMutation(gql`
@@ -54,7 +71,6 @@ export default function AccountInformationContainer() {
   `);
 
   const handleCloseModal = () => setModal('');
-  const handleInput = ({ target }) => setInputs(prev => ({ ...prev, [target.name]: target.value }));
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -64,6 +80,124 @@ export default function AccountInformationContainer() {
       console.warn({ ...err }); // eslint-disable-line no-console
     }
   };
+
+  const Skeleton = () => (
+    <>
+      <TextLoader>Firstname Lastname</TextLoader>
+      <TextLoader>Username</TextLoader>
+      <TextLoader>Email</TextLoader>
+      <TextLoader>Password</TextLoader>
+    </>
+  );
+
+  const Account = () => (
+    <>
+      <P
+        css={`
+          display: flex;
+        `}
+      >
+        <Text
+          css={`
+            font-weight: 700;
+          `}
+        >
+          {data?.me?.firstName} {data?.me?.lastName}
+        </Text>
+        <Button
+          title="Change name"
+          css={`
+            opacity: 0.5;
+            padding: 0.875rem;
+          `}
+          onClick={() => setModal('name')}
+        >
+          <Icon
+            icon="FaPen"
+            css={`
+              font-size: 1.25rem;
+              margin: 0 0.5rem 0 0;
+            `}
+          />
+        </Button>
+      </P>
+      <P
+        css={`
+          display: flex;
+        `}
+      >
+        <Text>{data?.me?.username}</Text>
+        <Button
+          title="Change username"
+          css={`
+            opacity: 0.5;
+            padding: 0.875rem;
+          `}
+          onClick={() => setModal('username')}
+        >
+          <Icon
+            icon="FaPen"
+            css={`
+              font-size: 1.25rem;
+              margin: 0 0.5rem 0 0;
+            `}
+          />
+        </Button>
+      </P>
+      <P
+        css={`
+          display: flex;
+        `}
+      >
+        <Text
+          css={`
+            display: inline-block;
+          `}
+        >
+          {data?.me?.email}
+        </Text>
+        <Button
+          title="Change email"
+          css={`
+            opacity: 0.5;
+            padding: 0.875rem;
+          `}
+          onClick={() => setModal('email')}
+        >
+          <Icon
+            icon="FaPen"
+            css={`
+              font-size: 1.25rem;
+              margin: 0 0.5rem 0 0;
+            `}
+          />
+        </Button>
+      </P>
+      <P
+        css={`
+          display: flex;
+        `}
+      >
+        <Text>••••••••</Text>
+        <Button
+          title="Change password"
+          css={`
+            opacity: 0.5;
+            padding: 0.875rem;
+          `}
+          onClick={() => setModal('password')}
+        >
+          <Icon
+            icon="FaPen"
+            css={`
+              font-size: 1.25rem;
+              margin: 0 0.5rem 0 0;
+            `}
+          />
+        </Button>
+      </P>
+    </>
+  );
 
   return (
     <Section
@@ -80,110 +214,10 @@ export default function AccountInformationContainer() {
           margin: 0 0 2rem;
         `}
       >
-        Account information
+        {t('settings.account.title')}
       </H2>
-      <P>
-        <Text
-          css={`
-            font-weight: 700;
-            display: inline-block;
-            ${emptyLoaderCSS}
-          `}
-        >
-          {data?.me?.firstName} {data?.me?.lastName}
-        </Text>
-        <Button
-          title="Change name"
-          css={`
-            font-size: 1.5rem;
-            opacity: 0.5;
-            padding: 1rem;
-          `}
-          onClick={() => setModal('name')}
-        >
-          <Icon
-            icon="FaPen"
-            css={`
-              font-size: 1.25rem;
-              margin: 0 0.5rem 0 0;
-            `}
-          />
-        </Button>
-      </P>
-      <P>
-        <Text
-          css={`
-            display: inline-block;
-            ${emptyLoaderCSS}
-          `}
-        >
-          {data?.me?.username}
-        </Text>
-        <Button
-          title="Change username"
-          css={`
-            font-size: 1.5rem;
-            opacity: 0.5;
-            padding: 1rem;
-          `}
-          onClick={() => setModal('username')}
-        >
-          <Icon
-            icon="FaPen"
-            css={`
-              font-size: 1.25rem;
-              margin: 0 0.5rem 0 0;
-            `}
-          />
-        </Button>
-      </P>
-      <P>
-        <Text
-          css={`
-            display: inline-block;
-            ${emptyLoaderCSS}
-          `}
-        >
-          {data?.me?.email}
-        </Text>
-        <Button
-          title="Change email"
-          css={`
-            font-size: 1.5rem;
-            opacity: 0.5;
-            padding: 1rem;
-          `}
-          onClick={() => setModal('email')}
-        >
-          <Icon
-            icon="FaPen"
-            css={`
-              font-size: 1.25rem;
-              margin: 0 0.5rem 0 0;
-            `}
-          />
-        </Button>
-      </P>
-      <P>
-        <Text>••••••••</Text>
-        <Button
-          title="Change password"
-          css={`
-            font-size: 1.5rem;
-            opacity: 0.5;
-            padding: 1rem;
-          `}
-          onClick={() => setModal('password')}
-        >
-          <Icon
-            icon="FaPen"
-            css={`
-              font-size: 1.25rem;
-              margin: 0 0.5rem 0 0;
-            `}
-          />
-        </Button>
-      </P>
+      {loading && <Skeleton />}
+      {data?.me && <Account />}
 
       <Modal isOpen={modal !== ''} onClose={handleCloseModal}>
         <H1
@@ -193,7 +227,7 @@ export default function AccountInformationContainer() {
             margin: 0 0 2rem;
           `}
         >
-          Change {modal}
+          {t('settings.account.form.title', { modal })}
         </H1>
         <Form
           css={`
@@ -204,7 +238,7 @@ export default function AccountInformationContainer() {
               ${modal === 'email' && "'warning warning' 'email email'"}
               ${modal === 'password' && "'newPassword newPassword'"}
               'password password'
-              'cancel submit'
+              'buttons buttons'
               / 1fr 1fr;
           `}
           onSubmit={handleSubmit}
@@ -214,19 +248,19 @@ export default function AccountInformationContainer() {
               <Input
                 type="text"
                 name="firstName"
-                label="First name"
-                placeholder="First name..."
-                error="Please add your given name"
+                label={t('settings.account.form.input.firstName.label')}
+                placeholder={t('settings.account.form.input.firstName.placeholder')}
+                error={t('settings.account.form.input.firstName.error')}
                 autoFocus={!__DEV__}
+                required
                 value={inputs.firstName}
                 onChange={handleInput}
               />
               <Input
                 type="text"
                 name="lastName"
-                label="Last name"
-                placeholder="Last name..."
-                error="Please add your family name"
+                label={t('settings.account.form.input.lastName.label')}
+                placeholder={t('settings.account.form.input.lastName.placeholder')}
                 value={inputs.lastName}
                 onChange={handleInput}
               />
@@ -236,11 +270,11 @@ export default function AccountInformationContainer() {
             <Input
               type="text"
               name="username"
-              label="Username"
-              placeholder="Choose your username..."
+              label={t('settings.account.form.input.username.label')}
+              placeholder={t('settings.account.form.input.username.placeholder')}
+              description={t('settings.account.form.input.username.description')}
+              error={t('settings.account.form.input.username.error')}
               pattern="^\w{4,}$"
-              description="Your username has to be at least 4 characters long"
-              error="Your username has to be at least 4 characters long"
               required
               value={inputs.username}
               onChange={handleInput}
@@ -254,22 +288,14 @@ export default function AccountInformationContainer() {
                   margin: 0 0 2rem;
                 `}
               >
-                Your current email is{' '}
-                <Text
-                  css={`
-                    font-weight: 700;
-                  `}
-                >
-                  {data?.me?.email}
-                </Text>
-                . Enter a new email and we will send you a verification code.
+                {t('settings.account.form.input.email.extra', { email: data?.me?.email })}
               </P>
               <Input
                 type="email"
                 name="email"
-                label="New email"
-                placeholder="New email..."
-                error="Your email has to be in the format of name@domain.com"
+                label={t('settings.account.form.input.email.label')}
+                placeholder={t('settings.account.form.input.email.placeholder')}
+                error={t('settings.account.form.input.email.error')}
                 required
                 value={inputs.email}
                 onChange={handleInput}
@@ -280,10 +306,10 @@ export default function AccountInformationContainer() {
             <Input
               type="password"
               name="newPassword"
-              label="New password"
-              placeholder="New password..."
+              label={t('settings.account.form.input.newPassword.label')}
+              placeholder={t('settings.account.form.input.newPassword.placeholder')}
+              error={t('settings.account.form.input.newPassword.error')}
               pattern="^\S{8,}$"
-              error="Your password has to be at least 8 characters long"
               required
               value={inputs.newPassword}
               onChange={handleInput}
@@ -292,34 +318,28 @@ export default function AccountInformationContainer() {
           <Input
             type="password"
             name="password"
-            label="Current password"
-            placeholder="Current password..."
+            label={t('settings.account.form.input.password.label')}
+            placeholder={t('settings.account.form.input.password.placeholder')}
+            error={t('settings.account.form.input.password.error')}
             pattern="^\S{8,}$"
-            error="Your password has to be at least 8 characters long"
             required
             value={inputs.password}
             onChange={handleInput}
           />
-          <Button
-            type="submit"
-            look="primary"
-            disabled={mLoading}
-            loading={mLoading}
+          <Menu
             css={`
-              grid-area: submit;
+              grid-area: buttons;
+              grid-auto-flow: column;
+              justify-content: end;
             `}
           >
-            Save
-          </Button>
-          <Button
-            look="tertiary"
-            css={`
-              grid-area: cancel;
-            `}
-            onClick={handleCloseModal}
-          >
-            Cancel
-          </Button>
+            <Button look="tertiary" onClick={handleCloseModal}>
+              {t('settings.account.form.button.cancel')}
+            </Button>
+            <Button type="submit" look="primary" disabled={mLoading} loading={mLoading}>
+              {t('settings.account.form.button.submit')}
+            </Button>
+          </Menu>
           <AppError
             error={error}
             errorMessages={{

@@ -6,7 +6,7 @@ import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
-import DarkModeContainer from '~containers/DarkModeContainer';
+import DarkModeContainer from '~containers/general/DarkModeContainer';
 import { Footer, Section, H2, Ul, Li, Link, Logo, Badge, P } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -40,7 +40,7 @@ const query = graphql`
 export default function FooterContainer() {
   const { footer } = useStaticQuery(query);
 
-  const renderLinks = item => {
+  const renderLinks = (item) => {
     if (item.type === 'markdown' || item.type === 'mdx') {
       return (
         <Li
@@ -79,7 +79,7 @@ export default function FooterContainer() {
               grid-gap: 1rem;
             `}
           >
-            {item.links.map(link => (
+            {item.links.map((link) => (
               <Li key={link.url || link.text}>
                 {link.url ? (
                   <Link
