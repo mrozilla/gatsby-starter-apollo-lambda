@@ -1,7 +1,7 @@
 {
   "name": "gatsby-starter-apollo-lambda",
   "description": "boilerplate for building an app using Gatsby and Apollo",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "homepage": "https://www.gatsby-starter-apollo-lambda.netlify.com",
   "repository": "https://github.com/mrozilla/gatsby-starter-apollo-lambda",
